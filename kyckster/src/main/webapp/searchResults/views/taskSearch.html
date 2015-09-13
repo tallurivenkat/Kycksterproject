@@ -1,0 +1,323 @@
+<div class="roundbox-outer">
+	<div class="roundbox-title">
+		<!-- 		
+			<a id="collapsibleSearch" data-target="#collapseOne"
+				data-toggle="collapse" ng-click="updateSearchArrowIcon($event)"
+				class="">
+				<span class="icon"><i class="fa fa-arrow-right"></i></span>
+ -->
+		<!-- 				<div class="buttons"> -->
+		<div class="buttons pull-right">
+			<a href="" class="btn" id="searchData"
+				ng-click="search(searchCriteria.selectedOrderType.name)"><span
+				class="text" style="font-size: 14px; padding-left: 5px;">Search</span>
+			</a>
+		</div>
+		<!-- 			</a> -->
+
+		<ul class="nav nav-tabs">
+			<li id="ordersTab" class="active"><a ui-sref="results.orders"
+				data-toggle="tab" data-target="#tab1"
+				ng-click="searchCriteria.selectedOrderType = searchOrderTypes[0]; clearUSRPData()">USRP
+					Orders</a></li>
+			<li id="srTab" class=""><a ui-sref="results.sr"
+				data-toggle="tab" data-target="#tab2"
+				ng-click="searchCriteria.selectedOrderType = searchOrderTypes[1]; clearSRCriteria()">Service
+					Requests</a></li>
+			<li id="crTab" class=""><a ui-sref="results.cr"
+				data-toggle="tab" data-target="#tab3"
+				ng-click="searchCriteria.selectedOrderType = searchOrderTypes[2]; clearCRCriteria()">Customer
+					Requests</a></li>
+		</ul>
+
+
+	</div>
+
+	<div class="roundbox-content tab-content">
+
+
+		<div id="tab1" class="tab-pane active">
+			<accordion>
+				<div class="row panel-collapse collapse"
+					collapse="resultsets.USRP.isCriteriaCollapsed"
+					style="margin-left: 15px;">
+					<div class="row">
+						<!-- Left Column -->
+						<div class="col-md-6 search-left-column">
+	
+							<!-- USRP Sales Order Name -->
+							<div class="row margin-bottom-10px margin-top-20px">
+								<div class="col-md-5 searchFieldLabel">
+									<label for="usrpOrderId" class="newton-label">USRP Sales
+										Order Name </label>
+								</div>
+								<div class="col-md-5" style="padding: 0px;">
+									<input type="text" ng-model="orderSearch.usrpOrderId"
+										class="form-control">
+								</div>
+	
+							</div>
+	
+							<!-- USRP Order Status -->
+							<div class="row margin-bottom-10px">
+								<div class="col-md-5 searchFieldLabel">
+									<label for="usrpOrderStatus" class="newton-label">USRP
+										Order Status </label>
+								</div>
+								<div class="col-md-5" style="padding: 0px;">
+									<div class="dropdown" style="width: 100%;">
+										<select class="dropdown-select form-control"
+											ng-model="orderSearch.usrpOrderStatus"
+											ng-options="u.name for u in usrpOrderStatusList" ng-change=""
+											style="width: 100%;"><option style="display:none" value=""></option></select>
+									</div>
+								</div>
+							</div>
+	
+							<!-- In Jeopardy? -->
+							<div class="row margin-bottom-10px">
+								<div class="col-md-5 searchFieldLabel">
+									<label for="inJeopardy" class="newton-label">In
+										Jeopardy? </label>
+								</div>
+								<div class="col-md-5" style="padding: 0px;">
+									<div class="dropdown" style="width: 100%;">
+										<select class="dropdown-select form-control"
+											ng-model="orderSearch.inJeopardy"
+											ng-options="j.name for j in jeopardyList" ng-change=""
+											style="width: 100%;"><option style="display:none" value=""></option>
+										</select>
+									</div>
+								</div>
+							</div>
+	
+							<!-- USO  (Comment this out for Feb Release)
+	               <div class="row margin-bottom-10px">
+					<div class="col-md-5 searchFieldLabel">
+						<label for="uso" class="newton-label">USO</label>
+					</div>
+					<div class="col-md-5" style="padding: 0px;">
+						<input type="text" ng-model="orderSearch.uso" class="form-control">
+					</div>
+				</div>
+				-->
+	
+							<!-- Customer Name -->
+							<!-- 							<div class="row margin-bottom-10px"> -->
+							<!-- 								<div class="col-md-5 searchFieldLabel"> -->
+							<!-- 									<label for="customerName" class="newton-label">Customer Name</label> -->
+							<!-- 								</div> -->
+							<!-- 								<div class="col-md-5" style="padding: 0px;"> -->
+							<!-- 									<input type="text" ng-model="orderSearch.customerName" class="form-control"> -->
+							<!-- 								</div> -->
+							<!-- 							</div> -->
+	
+						</div>
+	
+						<!--  Not needed here since spinner goes outside of each type criteria
+	 		<span us-spinner="{radius:9, width:5, length: 12, corners: 1, top: '110px', left: '-21px', className: 'spinner-search'}"></span>
+	 -->
+	
+						<!--  Right Column -->
+						<div class="col-md-6 search-right-column">
+	
+							<!-- Creation Date -->
+							<div class="row margin-bottom-10px margin-top-20px">
+								<div class="col-md-4 searchFieldLabel">
+									<label for="orderCreationDate" class="newton-label">Creation
+										Date</label>
+								</div>
+								<div class="col-md-8" style="padding: 0px;">
+									<div class="col-md-5" style="padding-left: 0px;">
+										<div class="input-group date" id="orderCreationSDate"
+											data-date="{{startDate}}" data-date-format="mm/dd/yyyy">
+											<input type="text" id="orderCreationStartDate"
+												class="form-control" ng-model="orderSearch.creation.sDate">
+											<span class="input-group-addon"><i
+												class="fa fa-calendar"></i><span
+												ng-click="pickOrderCreationStartDate()"></span></span>
+										</div>
+									</div>
+									<div class="col-md-5" style="padding-left: 0px;">
+										<div class="input-group date" id="orderCreationEDate"
+											style="height: 34px;" data-date="{{endDate}}"
+											data-date-format="mm/dd/yyyy">
+											<input type="text" id="orderCreationEndDate"
+												class="form-control" ng-model="orderSearch.creation.eDate">
+											<span class="input-group-addon"><i
+												class="fa fa-calendar"></i><span
+												ng-click="pickOrderCreationEndDate()"></span></span>
+										</div>
+									</div>
+								</div>
+							</div>
+	
+							<div ng-show="wrongOrderCreationStartDateEntered">
+								<div class="row margin-bottom-10px margin-top-20px">
+									<div class="col-md-3"></div>
+									<div class="col-md-8" style="padding: 0px; margin: 0px;">
+										<span style="color: red;">Start Date must be earlier
+											than End Date</span>
+									</div>
+								</div>
+							</div>
+	
+							<div ng-show="wrongOrderCreationEndDateEntered">
+								<div class="row margin-bottom-10px margin-top-20px">
+									<div class="col-md-3"></div>
+									<div class="col-md-8" style="padding: 0px; margin: 0px;">
+										<span style="color: red;">End Date must be later than
+											Start Date</span>
+									</div>
+								</div>
+							</div>
+	
+							<!-- Completion Date -->
+							<div class="row margin-bottom-10px">
+								<div class="col-md-4 searchFieldLabel">
+									<label for="orderCompletionDate" class="newton-label"
+										style="padding-left: 0px; padding-right: 0px;">Completion
+										Date</label>
+								</div>
+								<div class="col-md-8" style="padding: 0px;">
+									<div class="col-md-5" style="padding-left: 0px;">
+										<div class="input-group date" id="orderCompletionSDate"
+											data-date="{{startDate}}" data-date-format="mm/dd/yyyy">
+											<input type="text" id="orderCompletionStartDate"
+												class="form-control" ng-model="orderSearch.completion.sDate">
+											<span class="input-group-addon"><i
+												class="fa fa-calendar"></i><span
+												ng-click="pickOrderCompletionStartDate()"></span></span>
+										</div>
+									</div>
+									<div class="col-md-5" style="padding-left: 0px;">
+										<div class="input-group date" id="orderCompletionEDate"
+											data-date="{{endDate}}" data-date-format="mm/dd/yyyy">
+											<input type="text" id="orderCompletionEndDate"
+												class="form-control" ng-model="orderSearch.completion.eDate">
+											<span class="input-group-addon"><i
+												class="fa fa-calendar"></i><span
+												ng-click="pickOrderCompletionEndDate()"></span></span>
+										</div>
+									</div>
+								</div>
+							</div>
+	
+	
+							<div ng-show="wrongOrderCompletionStartDateEntered">
+								<div class="row margin-bottom-10px margin-top-20px">
+									<div class="col-md-3"></div>
+									<div class="col-md-8" style="padding: 0px; margin: 0px;">
+										<span style="color: red;">Start Date must be earlier
+											than End Date</span>
+									</div>
+								</div>
+							</div>
+	
+							<div ng-show="wrongOrderCompletionEndDateEntered">
+								<div class="row margin-bottom-10px margin-top-20px">
+									<div class="col-md-3"></div>
+									<div class="col-md-8" style="padding: 0px; margin: 0px;">
+										<span style="color: red;">End Date must be later than
+											Start Date</span>
+									</div>
+								</div>
+							</div>
+	
+							<!-- Service Name -->
+							<!--  
+				<div class="row margin-bottom-10px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="serviceName" class="newton-label">Service Name</label>
+					</div>
+					<div class="col-md-5" style="padding: 0px;">
+						<div class="dropdown" style="width: 100%;">
+							<select class="dropdown-select form-control"
+								ng-model="orderSearch.serviceName"
+								ng-options="s.name for s in serviceNameList" ng-change=""
+								style="width: 100%;">
+							</select>
+						</div>
+					</div>
+				</div>
+				-->
+	
+							<!-- LCM -->
+							<div class="row margin-bottom-10px">
+								<div class="col-md-4 searchFieldLabel">
+									<label for="lcm" class="newton-label">LCM Name (ATTUID)</label>
+								</div>
+								<div class="col-md-5" style="padding: 0px;">
+									<div class="dropdown" style="width: 100%;">
+										<select class="dropdown-select form-control"
+											ng-model="orderSearch.lcm"
+											ng-options="l.name for l in lcmList" style="width: 100%;">
+											<option style="display:none" value=""></option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	
+				<!-- Begin section for table results -->
+				<!-- Setup a collapse controller here... above the table so that it's at the top when the criteria
+								 is collapsed and below the criteria when expanded -->
+	
+				<a class="criteriaCollapser accordion-toggle"
+					ng-click="resultsets.USRP.isCriteriaCollapsed = !resultsets.USRP.isCriteriaCollapsed"
+					ng-show="shouldCollapserBeVisible('USRP')"
+					title="Expand or collapse search criteria"> <span class="icon">
+						<i
+						ng-class="(resultsets.USRP.isCriteriaCollapsed) ? 'fa fa-arrow-down' : 'fa fa-arrow-up'"></i>
+				</span>
+				</a>
+			</accordion>
+
+			<div
+				us-spinner="{radius:9, width:5, length: 12, corners: 1, top: '-15px;', left: 'auto', className: 'spinner'}"></div>
+
+			<alert-with-html data-error-prefix="<strong>Error: </strong>"
+				data-error-msg="resultsets.USRP.searchRequestErrorMsg"
+				data-error-msg-html="resultsets.USRP.searchRequestErrorMsgHtml"></alert-with-html>
+
+			<!-- 						<button type="submit" class="btn btn-sm btn-primary" ng-click="redrawTable()">Redraw Table</button> -->
+
+			<table
+				class="table table-bordered table-striped table-hover data-table"
+				id="resultsTableUSRP" search-result-table="resultsUSRP"
+				table-data="resultsets['USRP'].resultData"
+				fire-detail="getDetailsResult(orderType,id)">
+			</table>
+
+		</div>
+		<!-- Tab -->
+
+
+	</div>
+</div>
+
+<!-- Modal - Error Message -->
+
+<div class="modal fade" id="searchCriteriaAlertModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Search Criteria Error</h4>
+			</div>
+			<div class="modal-body">
+				<p>Please Select Search Criteria values...</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+</div>

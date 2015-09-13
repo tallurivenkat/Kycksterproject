@@ -1,0 +1,47 @@
+<ul>
+	<li data-ng-repeat="node in treeModel">
+		<i class="collapsed" data-ng-show="node.children.length && node.collapsed" data-ng-click="treeId.selectNodeHead(node)"></i>
+		<i class="expanded" data-ng-show="node.children.length && !node.collapsed" data-ng-click="treeId.selectNodeHead(node)"></i>
+		<i class="normal" data-ng-hide="node.children.length"></i>
+<!-- 		<span data-ng-class="node.selected" data-ng-click="treeId.selectNodeLabel(node)">{{node.displayName}}</span> -->
+		<span data-ng-class="node.selected" data-ng-click="treeId.selectNodeLabel(node)">
+			<span ng-bind-html="node.displayName"></span>
+			<span ng-switch on="node.hyperlink">
+				<span ng-switch-when="true">
+					<span ng-switch on="node.nodeType">
+					<!--  USO # won't be supported in Feb 2014 release
+						<span ng-switch-when="uso">
+							:&nbsp;&nbsp;&nbsp;
+							<a title="External link to EFMS for {{node.id}}" data-ng-href="{{node.efmsLink}}" target="_blank">
+							{{node.id}}</a>&nbsp;<span class="icon"><i class="fa fa-external-link"></i></span>
+						</span>
+					-->
+						<span ng-switch-when="order">
+				    		:&nbsp;&nbsp;&nbsp;
+				    		<a class="tablelinks" title="View details for {{node.id}}" data-ng-click="treeId.nodeInternalLinkClicked(node)">{{node.id}}</a>
+							&nbsp;<a title="External link to EFMS for {{node.id}}" data-ng-href="{{node.efmsLink}}" target="_blank">
+							<span class="icon"><i class="fa fa-external-link"></i></span></a>
+						</span>
+						<span ng-switch-default>
+							:&nbsp;&nbsp;
+							<a class="tablelinks" title="View details for {{node.id}}" data-ng-click="treeId.nodeInternalLinkClicked(node)">{{node.id}}</a>
+						</span>
+					</span>
+				</span>
+				<span ng-switch-default>
+					:&nbsp;&nbsp;{{node.id}}
+				</span>
+			</span>
+
+			<span class="icon" data-ng-show="node.hasErrors" style="color:red;"><i class="fa fa-exclamation"></i></span>
+		</span>
+		
+							
+		<!-- Note that this outter div had to be defined to get angular's hide/show attribute to work
+			it was originally in the next tree-view div but that was being overriden by the isolate scope directive -->
+			
+		<div data-ng-hide="node.collapsed">
+			<div tree-view tree-id="treeId" tree-model="node.children" data-base-template="treeTemplateUrl"></div>
+		</div>
+	</li>
+</ul>

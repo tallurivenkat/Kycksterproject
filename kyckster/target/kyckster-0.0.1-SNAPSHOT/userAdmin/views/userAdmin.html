@@ -1,0 +1,250 @@
+<div class="roundbox-outer">
+	<div class="roundbox-title">
+		<h5>User Profile Management Search</h5>
+		<div class="buttons pull-right">
+			<a href="" class="btn" id="searchUserProfile" ng-click="userProfileSearch()"><span
+				class="text" style="font-size: 14px; padding-left: 5px;">Search</span>
+			</a>
+		</div>
+	</div>
+
+	<div class="roundbox-content">
+		<div class="row">
+			<!-- Left Column -->
+			<div class="col-md-6" style="padding-right: 0px;">
+
+				<!-- UID -->
+				<div class="row margin-bottom-10px margin-top-20px">
+					<div class="col-md-4 searchFieldLabel" style="padding-left: 0px;">
+						<label for="uid" class="newton-label">UID</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+						<input type="text" ng-model="userAdmin.uid" class="form-control">
+					</div>
+				</div>
+
+				<!-- Order Action -->
+				<div class="row margin-bottom-10px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="orderAction" class="newton-label">Order Action</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+					    <div class="dropdown" style="width: 100%;"> 
+						<!-- <select class="dropdown-select form-control" ng-model="userAdmin.orderAction"
+								ng-options="o.name for o in userAdmin.orderActionList"
+								ng-change="" style="width: 100%;"></select>
+						-->
+						
+							<select multiselect-dropdown ng-model="userAdmin.orderAction" 
+							        multiple ng-multiple="true" ng-options="o.name for o in userAdmin.orderActionList" 
+							        height="32px">
+							</select> 
+						
+						<!--  
+						    <multiselect class="input-xlarge" multiple="true" ng-model="userAdmin.orderAction" 
+						                 ng-options="o.name for o in userAdmin.orderActionList" change="selected()">
+						    </multiselect>
+						-->
+	
+					    </div> 
+					</div>
+				</div>
+
+		
+
+				<!-- Port Speed -->
+				<div class="row margin-bottom-10px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="portSpeed" class="newton-label">Port Speed</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+						<div class="dropdown" style="width: 100%;">
+							<select class="dropdown-select form-control" ng-model="userAdmin.portSpeed"
+								ng-options="p.name for p in userAdmin.portSpeedList"
+								ng-change="" style="width: 100%;"></select>
+						</div>
+					</div>
+					
+					
+				</div>
+
+
+				<!-- Market Segment -->
+				<div class="row margin-bottom-10px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="marketSegment" class="newton-label">Market
+							Segment</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+						<div class="dropdown" style="width: 100%;">
+							<select class="dropdown-select form-control"
+								ng-model="userAdmin.marketSegment"
+								ng-options="m.name for m in userAdmin.marketSegmentList"
+								ng-change="" style="width: 100%;"></select>
+						</div>
+					</div>
+				</div>
+
+				<!-- Access Type -->
+				<div class="row margin-bottom-10px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="accessType" class="newton-label">Access Type</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+						<div class="dropdown" style="width: 100%;">
+							<select class="dropdown-select form-control" ng-model="userAdmin.accessType"
+								ng-options="a.name for a in userAdmin.accessTypeList"
+								ng-change="" style="width: 100%;"></select>
+						</div>
+					</div>
+				</div>
+
+				<!-- Service -->
+				<div class="row margin-bottom-10px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="service" class="newton-label">Service</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+						<div class="dropdown" style="width: 100%;">
+							<select class="dropdown-select form-control" ng-model="userAdmin.service"
+								ng-options="s.name for s in userAdmin.serviceList" ng-change=""
+								style="width: 100%;"></select>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div us-spinner="{radius:9, width:5, length: 12, corners: 1, top: '100px;', left: 'auto', className: 'spinner'}"></div>
+  
+ 
+     		<!-- Right Column -->
+			<div class="col-md-6" style="padding-right: 0px;">
+
+				<!-- Workgroup -->
+				<div class="row margin-bottom-10px margin-top-20px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="workgroup" class="newton-label">Workgroup</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+						<div class="dropdown" style="width: 100%;">
+							<select class="dropdown-select form-control" ng-model="userAdmin.workgroup"
+								ng-options="w.name for w in userAdmin.workgroupList"
+								ng-change="" style="width: 100%;"></select>
+						</div>
+					</div>
+				</div>
+
+				<!-- Local Access Arrangement -->
+				<div class="row margin-bottom-10px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="localAccessArrangement" class="newton-label">Local
+							Access Arrangement</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+						<div class="dropdown" style="width: 100%;">
+							<select class="dropdown-select form-control"
+								ng-model="userAdmin.localAccessArrangement"
+								ng-options="l.name for l in userAdmin.localAccessArrangementList"
+								ng-change="" style="width: 100%;"></select>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- BVOIP Type -->
+				<div class="row margin-bottom-10px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="bvoipType" class="newton-label">BVOIP Type</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+						<div class="dropdown" style="width: 100%;">
+							<select class="dropdown-select form-control" ng-model="userAdmin.bvoipType"
+								ng-options="b.name for b in userAdmin.bvoipTypeList"
+								ng-change="" style="width: 100%;"></select>
+						</div>
+					</div>
+				</div>
+
+				<!-- BVOIP Site Type -->
+				<div class="row margin-bottom-10px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="bvoipSiteType" class="newton-label">BVOIP Site
+							Type</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+						<div class="dropdown" style="width: 100%;">
+							<select class="dropdown-select form-control"
+								ng-model="userAdmin.bvoipSiteType"
+								ng-options="b.name for b in userAdmin.bvoipSiteTypeList"
+								ng-change="" style="width: 100%;"></select>
+						</div>
+					</div>
+				</div>
+
+				<!-- Region -->
+				<div class="row margin-bottom-10px">
+					<div class="col-md-4 searchFieldLabel">
+						<label for="region" class="newton-label">Region</label>
+					</div>
+					<div class="col-md-6" style="padding: 0px;">
+						<div class="dropdown" style="width: 100%;">
+							<select class="dropdown-select form-control" ng-model="userAdmin.region"
+								ng-options="r.name for r in userAdmin.regionList" ng-change=""
+								style="width: 100%;"></select>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+<div class="roundbox-outer">
+	<div class="roundbox-title">
+		<h5>Users</h5>
+		<div class="buttons pull-right">
+			<a href="" class="btn" id="addUser" ng-click="addUser()"><i class="fa fa-plus"></i><span
+				class="text" style="font-size: 14px; padding-left: 5px;">Add</span>
+			</a>
+		</div>
+	</div>
+
+	<div class="roundbox-content">
+		<div class="row">
+		<div class="table-responsive">
+			<table id="messages" class="table table-bordered table-condensed">
+				<tr>
+					<th>UID</th>
+					<th>First Name</th>
+					<th>MI</th>
+					<th>Last Name</th>
+					<th></th>
+					<th></th>
+		        </tr>
+
+				<tr>
+				<!-- 
+					<td>{{createdDate}}</td>
+					<td>{{description}}</td>
+                    <td>{{expirationDate}}</td>
+
+					<td><a class="btn btn-default btn-xs btn-primary"
+						id="row{{@index}}"> <i class="glyphicon glyphicon-trash"></i>
+							Delete
+					</a></td>
+				-->
+				</tr>
+
+
+			</table>
+		</div>
+		
+		</div>
+	</div>
+</div>

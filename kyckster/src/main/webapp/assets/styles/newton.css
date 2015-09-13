@@ -1,0 +1,1127 @@
+* {
+  outline: none !important;
+  -moz-outline: none !important;
+}
+
+/* Main */
+body {
+  overflow-y: auto;
+  margin-top: -20px;
+}
+
+/* Header */
+#header {
+	position: relative;
+	width: 100%;
+	z-index: 0;
+	height: 70px; 
+	background: -webkit-linear-gradient(top, #5B7FA6, #426285); 
+	background: -moz-linear-gradient(top, #5B7FA6, #426285); 
+	border-width: 2px;
+}
+#menu-toggle {
+	background-color: transparent; 
+	margin-right: 12px; 
+	margin-top: -5px;
+}
+
+/* Content */
+#page-content {
+	border-bottom-right-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 8px;
+	border-top-left-radius: 8px;
+	background: none repeat scroll 0 0 #f2f2f2;
+	margin-right: 0;
+	position: relative;
+	min-height: 500px;
+	width: auto;
+}
+
+.search-left-column {
+	padding-right: 0px;
+}
+
+.search-right-column {
+	padding-left: 0px;
+}
+
+
+@media (max-width: 992px) {
+	
+	.search-left-column {
+		padding-right: 15px;
+	}
+
+	.search-right-column {
+		padding-left: 15px;
+	}
+}
+
+.newton-datepicker-from {
+	padding-left: 0px; 
+	padding-right: 30px;
+	display: inline-block;
+}
+	
+.newton-datepicker-to {
+	padding-left: 0px; 
+	padding-right: 30px; 
+	margin-left: -27px;
+	display: inline-block;
+}
+
+@media (min-width: 1200px) and (max-width: 1440px)  {
+	
+	.newton-datepicker-from {
+		padding-left: 0px;
+		padding-right: 25px;
+		display: inline-block;
+	}
+		
+	.newton-datepicker-to {
+		padding-left: 0px;
+		padding-right: 25px;
+		margin-left: -18px;
+		display: inline-block;
+	}
+	
+}
+
+@media (min-width: 992px) and (max-width: 1199px)  {
+	
+	.newton-datepicker-from {
+		padding-left: 0px;
+		padding-right: 5px;
+		display: inline-block;
+	}
+	
+	.newton-datepicker-to {
+		padding-left: 0px;
+		padding-right: 0px;
+		margin-left: 0px;
+		display: inline-block;
+	}
+	
+}
+
+@media (max-width: 991px)  {
+	
+	.newton-datepicker-from {
+		padding-left: 0px; 
+		display: block;
+		padding-right: 0;
+	}
+		
+	.newton-datepicker-to {
+		padding-left: 0px; 
+		padding-right: 0px;
+		margin-left: 0px;
+		display: block;
+		margin-top: 5px;
+	}
+	
+}
+
+/* General styles for round boxes*/
+.roundbox-outer {
+  background: none repeat scroll 0 0 #fafafa;
+  border: 1px solid #CDCDCD;
+  clear: both;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  position: relative;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.roundbox-outer .roundbox-title a {
+  color: #555555;
+}
+.roundbox-outer .roundbox-title span.icon {
+  border-right: 1px solid #cdcdcd;
+  padding: 8px 10px 8px 11px;
+  float: left;
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  -webkit-box-shadow: 1px 0 0 0 #ffffff;
+  box-shadow: 1px 0 0 0 #ffffff;
+}
+.roundbox-outer .roundbox-title span.icon.pull-right {
+  border-right: 0;
+  border-left: 1px solid #ffffff;
+  -webkit-box-shadow: -1px 0 0 #cdcdcd;
+  box-shadow: -1px 0 0 #cdcdcd;
+}
+.roundbox-outer .roundbox-title span.icon.with-checkbox {
+  padding-bottom: 2px;
+}
+.roundbox-outer .roundbox-title h5 {
+  color: #666666;
+  text-shadow: 0 1px 0 #ffffff;
+  float: left;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px;
+  line-height: 12px;
+  margin: 0;
+}
+.roundbox-outer .roundbox-title .nav-tabs {
+  border-bottom: 0 none;
+}
+.roundbox-outer .roundbox-title .nav-tabs li {
+  margin-bottom: 0;
+}
+.roundbox-outer .roundbox-title .nav-tabs li a {
+  border-bottom: medium none !important;
+  border-left: 1px solid #DDDDDD;
+  border-radius: 0;
+  border-right: 1px solid #DDDDDD;
+  border-top: medium none;
+  color: #999999;
+  margin: 0;
+  outline: medium none;
+  padding: 9px 10px 8px;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #FFFFFF;
+}
+.roundbox-outer .roundbox-title .nav-tabs li a:hover {
+  background-color: transparent;
+  border-color: #D6D6D6;
+  border-width: 0 1px;
+  color: #666666;
+}
+.roundbox-outer .roundbox-title .nav-tabs li a [class*="icon-"] {
+  margin-right: 3px;
+}
+.roundbox-outer .roundbox-title .nav-tabs li.active a,
+.roundbox-outer .roundbox-title .nav-tabs li.active a:hover,
+.roundbox-outer .roundbox-title .nav-tabs li.active a:focus {
+  background-color: #F9F9F9 !important;
+  color: #444444;
+  border-top: 0;
+}
+.roundbox-outer .roundbox-title .nav-tabs li:first-child a {
+  border-left: medium none !important;
+  border-top-left-radius: 5px;
+}
+.roundbox-outer .roundbox-title .nav-tabs.pull-right li:first-child a {
+  border-top-left-radius: 0;
+  border-left: 1px solid #dddddd !important;
+}
+.roundbox-outer .roundbox-title .nav-tabs.pull-right li:last-child a {
+  border-right: 0 !important;
+  border-top-right-radius: 5px;
+}
+.roundbox-outer .roundbox-title .buttons {
+  float: right;
+  margin: 0 0 0 0;
+}
+.roundbox-outer .roundbox-title .buttons .btn {
+  padding: 9px 10px 6px;
+  color: #555555;
+  border-radius: 0;
+  border-left: 1px solid #dddddd;
+  text-shadow: 0 1px 0 #ffffff;
+  font-size: 12px;
+  line-height: 17px;
+  margin: 0;
+  -webkit-box-shadow: 1px 0 0 0 rgba(255, 255, 255, 0.8) inset;
+  box-shadow: 1px 0 0 0 rgba(255, 255, 255, 0.8) inset;
+}
+.roundbox-outer .roundbox-title .buttons .btn [class*="icon-"] {
+  vertical-align: text-top;
+  margin-right: 3px;
+}
+.roundbox-outer .roundbox-title .buttons .btn:last-child {
+  border-radius: 0 6px 0 0;
+}
+.roundbox-outer .roundbox-title .buttons .btn:hover,
+.roundbox-outer .roundbox-title .buttons .btn:active {
+  background-color: #fdfdfd;
+  border-width: 0 1px;
+  border-color: transparent transparent transparent #dddddd;
+  padding: 9px 10px 6px;
+  line-height: 19px;
+  -webkit-box-shadow: 1px 1px 0 0 #ffffff inset;
+  box-shadow: 1px 1px 0 0 #ffffff inset;
+  background-image: -webkit-linear-gradient(top, #f8f4fc 0%, #f4f1f7 100%);
+  background-image: linear-gradient(to bottom, #f8f4fc 0%, #f4f1f7 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff8f4fc', endColorstr='#fff4f1f7', GradientType=0);
+}
+.roundbox-outer .roundbox-title .buttons .btn:active {
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+}
+
+.roundbox-outer .roundbox-title .label {
+  padding: 3px 5px 2px;
+  float: right;
+  margin: 9px 15px 0 0;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.3) inset, 0 1px 0 #ffffff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3) inset, 0 1px 0 #ffffff;
+}
+.roundbox-outer .roundbox-content {
+  padding: 12px 15px;
+}
+.roundbox-outer .roundbox-content > hr {
+  margin: 20px -15px;
+  height: 0px;
+  border-width: 1px 0;
+  border-style: solid none;
+  border-color: #eeeeee transparent #fff;
+}
+.roundbox-outer.collapsible .collapse.in .roundbox-content {
+  border-bottom: 1px solid #CDCDCD;
+}
+@media (max-width: 767px) {
+  .roundbox-outer .roundbox-title .buttons {
+    float: right;
+  }
+  .roundbox-outer .roundbox-title .buttons > .btn {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 10px 3px 6px 10px !important;
+  }
+  .roundbox-outer .roundbox-title .buttons > .btn:last-child {
+    padding: 9px 6px 6px 10px !important;
+    border-right: 1px solid #dddddd;
+  }
+}
+
+.roundbox-title,
+.modal-header,
+.table th,
+div.dataTables_wrapper .ui-widget-header,
+.ui-dialog .ui-dialog-titlebar {
+  border-bottom: 1px solid #CDCDCD;
+  height: 36px;
+  -webkit-box-shadow: 0 1px 0 #ffffff inset;
+  box-shadow: 0 1px 0 #ffffff inset;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+div.dataTables_wrapper .ui-widget-header {
+  background-color: #f2f2f2;
+}
+.ui-widget-overlay {
+  position: fixed;
+}
+
+#sidebar-wrapper > ul {
+	border-top: 1px solid #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+	padding-left: 0px;
+}
+
+#sidebar-wrapper > ul > li > a {
+  padding: 10px 0 10px 15px;
+  display: block;
+  color: #FFFFFF;
+  font-family: 'Signika Negative', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+
+#sidebar-wrapper > ul > li {
+	background-image: -webkit-linear-gradient(top,#5B7FA6,#426285);
+	background-image: -moz-linear-gradient(top,#5B7FA6,#426285);
+}
+
+/* highlights the menu item, except for when it's active */
+#sidebar-wrapper > ul > li:hover {
+	background-image: -webkit-linear-gradient(top,#5B7FA6,#5B7FA6);
+	background-image: -moz-linear-gradient(top,#5B7FA6,#5B7FA6);
+}
+
+#sidebar-wrapper > ul > li.active {
+	background-image: -webkit-linear-gradient(top,#365372,#324E6D);
+	background-image: -moz-linear-gradient(top,#365372,#324E6D);
+}
+
+/* places the cool arrow to the right giving the main content a speach bubble look */
+#sidebar-wrapper > ul > li.active > a {
+	background: url("../images/menu-active.png") no-repeat scroll right center transparent !important;
+}
+
+#sidebar-wrapper > ul > li > a > i {
+	margin-right: 10px;
+}
+
+#sidebar-wrapper > ul > li > a, a:hover {
+	text-decoration: none !important;
+}
+
+/***********************************************
+     Newton GUI layout containers styles
+************************************************/
+.newton-content {
+	padding-left: 25px; 
+	padding-right: 25px;
+}
+
+/* set the height of the dropdown to the same height of the edit field */
+
+select {
+    border: 1px solid #ccc;
+	height: 32px;
+	padding: 4px 6px;
+	border-radius: 4px;
+}
+
+/* IT would be nice if we could do something similar to class inhereritence where
+   dropdown-select also tags elements as form-control
+   How can we do something like this?
+    
+select.dropdown-select {
+	.form-control;
+}
+*/
+
+/***********************************************
+     overwrite bootstrap css here 
+************************************************/
+
+.glyphicon {
+	position: relative;
+	top: 1px;
+	display: inherit;
+	font-family: 'Glyphicons Halflings';
+	-webkit-font-smoothing: antialiased;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+}
+
+.row {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+/*******************************************************************************
+  Allow angular.js to be loaded in body, hiding cloaked elements until 
+  templates compile.  The !important is important given that there may be 
+  other selectors that are more specific or come later and might alter display.  
+********************************************************************************/
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none;
+}
+
+/***********************************************
+     overwrite dataTables css here 
+************************************************/
+
+/* #resultsTable {*/ 
+.dataTables_wrapper {
+	width: 100%;
+}
+
+/* Need this to prevent inner scroll table from centering in window while header does not */
+
+table.dataTable {
+	float: left;
+}
+
+
+a.DTTT_button {
+	/* Override the following styles away from definitions in TableTools and BACK to bootstrap */
+/* Unfortunately CSS appears to not have a superclass designation */
+	border: 1px solid #ccc;
+	border-radius: 4px;			 
+}
+
+.DTTT_button_xls > span {
+	background: url(/newtongui/assets/images/excel.png) no-repeat left ;
+	background-size: contain; /* 15px 15px; */
+display: inline-block;
+width: 80px;
+margin-right: -15px;
+font-size: 14px;
+font-weight: normal;
+padding-left: 20px;
+/* Override the following styles away from definitions in TableTools and BACK to bootstrap */
+/* Unfortunately CSS appears to not have a superclass designation */
+	color: #333;
+}
+
+div.DTTT_container {
+	padding: 10px;
+	margin: 0;	
+}
+
+div.DTTT.btn-group {
+	padding-top: 4px;
+	float: right;
+}
+
+/* Will be 12px otherwise for "Search Results:" */
+
+div.dataTables_filter label {
+	font-size: 14px;
+}
+
+/* Need this to force search field in table to be slightly smaller than large input fields in forms
+   and to flow from left to right */
+    
+div.dataTables_filter .form-control {
+	display: inline-block;
+	height: 30px;
+}
+
+div.dataTables_filter {
+	float: right;
+	margin-top: 1em;
+	margin-right: 1em;
+}
+
+div.dataTables_length .form-control {
+	display: inline-block;
+	height: 30px;
+	padding-left: 8px;		/* had some trouble when '100' was displayed on FF on some screen resolutions, ticket 16331 */
+}
+
+/* floats to left side unless we override */
+.dataTables_wrapper .dataTables_length {
+  	float: right;
+  	position: relative;
+  	height: 30px;
+  	padding: 10px;
+  	margin: 0;
+}
+
+
+/* to get a cool black line under the table header... Defined in jquery.dataTables.css but
+   not included in the dataTables.jqueryui.css ... An oversight, I beleieve */
+table.dataTable thead th,
+table.dataTable thead td {
+  border-bottom: 1px solid #111111;
+}
+
+table.dataTable.no-footer {
+  border-bottom: 1px solid #111111;
+  margin-bottom: 0.5em;
+}
+
+table.dataTable th { 
+	font-size: 12px;
+	white-space: nowrap;
+}
+
+table.dataTable td {
+	white-space: nowrap;
+}
+ 
+.roundbox-outer .roundbox-title h5 {
+  font-size: 14px;
+}
+
+div.dataTables_info {
+	margin-left: 10px;
+	margin-right: 10px;	
+}
+
+.table th {
+	font-size: 14px;
+	height: auto;
+	padding: 5px 10px 2px;
+	border-bottom: 0;
+	text-align: center;
+	color: #666666;
+	vertical-align: middle !important;
+}
+
+/* Set row heights for datatables in the profile section   .dataTables */
+
+table.saved-search-table tbody td {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+/* Style for saved search table records... First anchor is shared or not */
+table.saved-search-table tbody td a {
+	color: #333333;		/* same color as body */
+	cursor: pointer;
+}
+
+/* Used in datatables sort icon alignment */
+
+.css_right {
+	float: right;
+}
+
+/* Turn off the small sort icon that shows up to the right and below (in almost all cases) the header.
+   This only effects the span injected after the column header text, not the outter sort style */
+
+.DataTables_sort_icon {
+	display: none;
+}
+
+table.dataTable td.dataTables_empty {
+  color: red;
+}
+
+/* Datatables pagination overrides */
+
+
+.dataTables_paginate .ui-button, .pagination.alternate li a {
+	font-size: 12px;
+	padding: 4px 10px !important;
+	border-style: solid;
+	border-width: 1px 1px 1px 0;
+	display: inline-block;
+	line-height: 16px;
+	color: #333333;
+	text-shadow: 0 1px 0 #ffffff;
+	margin-right: 0;
+}
+
+.dataTables_paginate span .ui-state-disabled, .pagination.alternate li.active a {
+	color: #ffffff !important;
+	cursor: default !important;
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset !important;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset !important;
+	opacity: 1;
+	filter: alpha(opacity=100);
+/* Highlights the active page */
+	border: 1px solid #333 !important;
+}
+
+
+div.dataTables_paginate {
+	padding: 10px 2px 10px 2px;
+}
+
+
+
+/***************** ColVis overrides */
+
+div.ColVis {
+	float: right;
+	margin-bottom: 1em;
+	margin-top: 1.2em;
+}
+
+/* Overrides so that column buttons don't appear to have an outer container */
+ul.ColVis_collection {
+	padding: 0px;
+	width: auto; 
+	overflow: visible;		/* Was hidden, makes it a bit wider */
+	border: none;
+}
+
+ul.ColVis_collection li {
+	margin-bottom: 0px;
+	padding: 3px 5px;		/* would have checkbox too far left */
+border: 1px solid #ccc; /* override to get back to ui-button style */
+color: #333;			/* override to get back to ui-button style */
+}
+
+button.ColVis_Button {
+	height: auto;
+	border-radius: 4px;
+	border: 1px solid #ccc;	/* override to get back to ui-button style */
+}
+
+/* Override to stop the 2px added space out of buttons in drop-down */
+
+ul.ColVis_collection button.ColVis_Button {
+	margin-bottom: 0px;
+}
+
+
+/***********************************************
+     Flot Chart 
+************************************************/
+.wrapper {
+   margin: auto;
+   width: 800px;
+   margin-top: 50px;
+   font-size: 12pt;
+}
+
+.graph {
+   margin-top: 20px;
+   width: 700px;
+   height: 400px;
+}
+
+.ui-button-text { font-size: 0.8em; }
+.controls > div { display: inline-block; }
+.controls .mlabel { margin: 5px; color: #888; font-weight: bold; font-size: 0.9em; }
+
+.tooltip {
+   font-size: 1em;
+   opacity: 1;
+   padding: 0;
+   position: absolute;
+   z-index: 12;
+   color: #888;
+   background: #fff;
+   border: 1px solid #aaa;
+   -moz-box-shadow: 0px 1px 1px #ddd;
+   -webkit-box-shadow: 0px 1px 1px #ddd;
+   box-shadow: 0px 1px 2px #ddd;
+}
+
+.tooltip div {
+   position: relative;
+   text-align: center;
+   margin: 3px;
+   max-width:100px;	
+}
+
+.tooltip span { font-size: 0.7em; display: block; }
+.tooltip span.series { color: #333; }
+
+.tooltip:after {
+   content: ' ';
+   position: absolute;
+   width: 0;
+   height: 0;
+   margin-left: -5px;
+   bottom: -10px;
+   left: 50%;
+   border-width: 5px;
+   border-style: solid;
+   border-color: #aaa transparent transparent transparent ;
+}
+
+.hidden-label { 
+    display: none; 
+}
+
+/*******************************************************************************
+  For ng-grid  
+********************************************************************************/
+
+.ngTopPanel {
+	background-color: #428bca;
+	color: #ffffff;
+}
+
+/***********************************************
+     Google Table Filter overwrite  
+************************************************/
+.google-visualization-controls-stringfilter .google-visualization-controls-label {
+	padding-top: 0.3em;
+	font-weight: normal;
+}
+
+/***********************************************
+     Home-grown CSS Styles define here 
+************************************************/
+
+.newton-separator-line {
+	margin: 5px -5px 0px -5px;
+	text-decoration: none;
+	border-bottom: solid black;
+}
+
+.newton-centering {
+	float:none;
+	margin:0 auto
+}
+
+.newton-lightBlueBackground {
+	background-color:#428bca;
+}
+
+.newton-whiteBackground {
+	background-color:#ffffff;
+}
+
+
+input.search-query {
+    padding-left:5px;
+}
+
+form.form-search {
+    position: relative;
+}
+
+form.form-search:before {
+    content:"\e003";
+    display: block;
+    width: 14px;
+    height: 10px;
+    background-position: -48px 0;
+    position: absolute;
+    top:4px;
+    left:8px;
+    opacity: .5;
+    z-index: 1000;
+}
+
+#detailsTabHeader.active > a, 
+#detailsTabHeader.active > a:hover, 
+#detailsTabHeader.active > a:focus{
+	
+	border: solid;
+	border-color: #428bca;
+	border-background: #428bca; 
+	background-color: #428bca;
+	margin-bottom: 20px;
+	color: #ffffff;
+	border-radius: 4px;
+	width: 130px;
+}
+
+#orderProgressTabHeader.active > a, 
+#orderProgressTabHeader.active > a:hover, 
+#orderProgressTabHeader.active > a:focus{
+	
+	border: solid;
+	border-color: #428bca;
+	border-background: #428bca; 
+	background-color: #428bca;
+	margin-bottom: 20px;
+	color: #ffffff;
+	border-radius: 4px;
+	width: 130px;
+}
+
+#detailsTabHeader > a {
+	 
+	margin-right: 2px;
+  	line-height: .6;
+  	border-radius: 4px 4px 0 0;
+  	font-size:12px;
+  	width: 130px;
+}
+
+#orderProgressTabHeader > a {
+	
+	margin-right: 2px;
+  	line-height: .6;
+  	border-radius: 4px 4px 0 0;
+  	font-size:12px;
+  	width: 130px;
+}
+
+.refreshImageSize{
+	width: 20px; 
+	height: auto;
+}
+
+.helpImageSize{
+	width: 12px; 
+	height: auto;
+}
+
+.ui-widget-header {
+	color: #222222;
+	font-weight: normal;
+}
+
+#tablelinks{
+	color: #428bca;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#search{
+    float: right;
+    margin-right: 30px;
+    margin-top: 35px;
+}
+
+#searchField{
+    border: 1px solid #FFEDE8;
+    float: left;
+    height: 20px;
+    padding-right: 25px;
+    width: 140px;}
+
+
+#searchSubmit{
+	font-family: 'Glyphicons Halflings';
+    cursor: pointer;
+    height: 20px;
+    margin-left: -22px;
+    margin-top: 5px;
+    width: 20px;
+}
+
+
+/*******************************************************************************
+  overwrite jquery UI
+********************************************************************************/
+.ui-icon-triangle-1-s {
+	background-position: -64px -14px;
+}
+
+/*******************************************************************************
+  Style for new GUI app
+********************************************************************************/
+
+.unicorn-template-content-color {
+	background-color: #none repeat  0 0 #fafafa;
+}
+
+.newton-table-borderless td,th {
+	border: 0 !important;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.newton-tableLegendSpacer {
+	padding-top: 50px;
+	padding-bottom: 10px;
+}
+
+.center {
+	display: block;
+	margin: 0 auto;
+}
+
+.gray-border {
+	border: 1px solid #C2C2C2;
+}
+
+.newton-label {
+	color: #555555;
+	font-weight: normal;
+	padding-top: 7px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.innerImageInputField {
+	width: 100%;
+	height: 26px;
+	margin-bottom: 7px;
+	margin-left: -5px;
+	margin-right: 5px;
+	border-color: #862525;
+	background-color: #F5F5F5;
+	padding: 4px;
+	border: solid;
+	border-width: 1px;
+	border-color: #DDDDDD;
+	text-align: center;
+	margin-right: 16px;
+}
+
+.searchFieldLabel {
+	text-align: right;
+	padding-left: 0px;
+}
+
+.spinner-search {
+	margin: 0 auto;
+}
+
+.padding-top-0px  	 { padding-top:0px;  }
+.padding-top-5px  	 { padding-top:5px;  }
+.padding-top-10px 	 { padding-top:10px; }
+.padding-top-15px 	 { padding-top:15px; }
+.padding-top-20px	 { padding-top:20px; }
+.padding-top-25px 	 { padding-top:25px; }
+
+.padding-bottom-0px  { padding-bottom:0px;  }
+.padding-bottom-5px  { padding-bottom:5px;  }
+.padding-bottom-10px { padding-bottom:10px; }
+.padding-bottom-15px { padding-bottom:15px; }
+.padding-bottom-20px { padding-bottom:20px; }
+.padding-bottom-25px { padding-bottom:25px; }
+
+.padding-left-0px 	 { padding-left:0px;  }
+.padding-left-5px 	 { padding-left:5px;  }
+.padding-left-10px	 { padding-left:10px; }
+.padding-left-15px 	 { padding-left:15px; }
+.padding-left-20px 	 { padding-left:25px; }
+.padding-left-25px 	 { padding-left:30px; }
+
+.padding-right-0px 	 { padding-right:0px;  }
+.padding-right-5px 	 { padding-right:5px;  }
+.padding-right-10px  { padding-right:10px; }
+.padding-right-15px  { padding-right:15px; }
+.padding-right-20px  { padding-right:20px; }
+.padding-right-25px  { padding-right:25px; }
+
+.margin-top-0px  	 { margin-top:0px;  }
+.margin-top-5px  	 { margin-top:5px;  }
+.margin-top-10px 	 { margin-top:10px; }
+.margin-top-15px 	 { margin-top:15px; }
+.margin-top-20px	 { margin-top:20px; }
+.margin-top-25px 	 { margin-top:25px; }
+
+.margin-bottom-0px   { margin-bottom:0px;  }
+.margin-bottom-5px   { margin-bottom:5px;  }
+.margin-bottom-10px  { margin-bottom:10px; }
+.margin-bottom-15px  { margin-bottom:15px; }
+.margin-bottom-20px  { margin-bottom:20px; }
+.margin-bottom-25px  { margin-bottom:25px; }
+
+.margin-left-0px 	 { margin-left:0px;  }
+.margin-left-5px 	 { margin-left:5px;  }
+.margin-left-10px	 { margin-left:10px; }
+.margin-left-15px 	 { margin-left:15px; }
+.margin-left-20px 	 { margin-left:25px; }
+.margin-left-25px 	 { margin-left:30px; }
+
+.margin-right-0px	 { margin-right:0px;  }
+.margin-right-5px 	 { margin-right:5px;  }
+.margin-right-10px   { margin-right:10px; }
+.margin-right-15px   { margin-right:15px; }
+.margin-right-20px   { margin-right:20px; }
+.margin-right-25px   { margin-right:25px; }
+
+/*******************************************************************************
+   Style overrides for angular.treeview.js
+   Originally came from 3rd party control, angular.treeview.css, licensed under
+   MIT license but now included in newton source.
+********************************************************************************/
+
+div[tree-view] {
+  /* prevent user selection */
+-moz-user-select: -moz-none;
+-khtml-user-select: none;
+-webkit-user-select: none;
+-ms-user-select: none;
+user-select: none;
+
+/* Allow bootstrap body style to come through
+font-family: Tahoma;
+font-size:13px;
+color: #555;
+text-decoration: none;   */
+}
+
+div[tree-view] ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; 
+  border: none;
+  overflow: hidden;
+}
+
+div[tree-view] li {
+  position: relative;
+  padding: 0 0 0 20px;
+  line-height: 20px;
+}
+
+div[tree-view] li .expanded {
+  padding: 1px 10px;
+  background-image: url("../images/folder.png");
+  background-repeat: no-repeat;
+}
+
+div[tree-view] li .collapsed {
+  padding: 1px 10px;
+  background-image: url("../images/folder-closed.png");
+  background-repeat: no-repeat;
+}
+
+div[tree-view] li .normal {
+  padding: 1px 10px;
+  background-image: url("../images/file.png");
+  background-repeat: no-repeat;
+}
+
+div[tree-view] li i, div[tree-view] li span {
+  cursor: pointer;
+}
+
+div[tree-view] li .selected {
+/*  background-color: #aaddff; */
+font-weight: bold;
+/*  padding: 1px 5px; */ 
+}
+
+/* Class for controlling the search criteria expander buttons */
+.criteriaCollapser {
+	position: relative;
+	bottom: -20px;
+	z-index: 3000;
+	cursor: pointer;
+}
+
+/* Put your css in here */
+
+multiselect {
+    display:block;
+}
+multiselect .btn {
+    width: 100%;
+    background-color: #FFF;
+}
+multiselect .btn.error{
+    border: 1px solid #da4f49 !important;
+}
+multiselect .dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+}
+multiselect .dropdown-menu {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2px;
+}
+multiselect .dropdown-menu > li > a {
+    padding: 3px 10px;
+    cursor:pointer;
+}
+
+/* Override bootstrap to make small buttons smaller */
+.btn-xs {
+	font-size: 10.5px;
+	padding: 3px 8px;
+}
+
+/* Styles for the fly-out search save feature */
+#flyoutpanel {
+  position: absolute; /*fixed;*/
+  top: 35px; /*97px;*/
+  right: 0;
+  z-index: 50;
+}
+#flyoutpanel #flyoutpanel-inner {
+  display: none;
+  background-color: #ffffff;
+  margin-left: -1px;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+#flyoutpanel-inner .row {
+	padding-bottom: 15px;
+}
+#flyoutpanel #flyoutpanel-inner .button:hover {
+  background-color: #e7e7e7;
+}
+#flyoutpanel #flyoutpanel-inner .button.active {
+  border: 2px solid #999999;
+}
+#flyoutpanel #flyoutpanel-button {
+  width: 35px;
+  height: 35px;
+  background-color: #ffffff; 
+  position: absolute;
+  top: 6px;
+  left: -35px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  border: 1px solid #dddddd;
+  border-right-width: 0px;
+  -webkit-box-shadow: -2px -2px 6px -3px rgba(0, 0, 0, 0.15),
+                      -2px 2px 6px -3px rgba(0, 0, 0, 0.15);
+  box-shadow: -2px -2px 6px -3px rgba(0, 0, 0, 0.15),
+              -2px 2px 6px -3px rgba(0, 0, 0, 0.15);
+}
+#flyoutpanel #flyoutpanel-button i {
+  display: inline-block;
+  font-size: 20px;
+  margin: 7px 0 0 6px;
+}
+#flyoutpanel #flyoutpanel-button:hover {
+  cursor: pointer;
+}
+
+
+

@@ -1,0 +1,230 @@
+body {
+	padding-top: 60px;
+	 background-color: #fff983;
+}
+
+ng-hide {
+	display: none;
+}
+
+.loader {
+	font-size: 36px;
+	line-height: 36px;
+	font-weight: bold;
+	width: 200px;
+	height: 36px;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.trapit-content .content-item {
+height: 320px;
+max-height: 320px;
+}
+.block.thirds {
+width: 32.63158%;
+float: left;
+margin-right: 1.05263%;
+display: inline;
+}
+.block.stroke {
+border: 1px solid #ececec;
+}
+.trapit-content .content-item img {
+width: 100%;
+height: auto;
+}
+.icon, .mfp-close.icon {
+font-family: 'trapit';
+speak: none;
+font-style: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+line-height: 1;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+body.hover .trapit-content .content-item:hover {
+color: #00a69c;
+}
+.lead {
+margin: 0;
+padding-bottom: 0;
+font-size: 22px;
+font-size: 1.375rem;
+line-height: 28px;
+line-height: 1.75rem;
+padding-top: 51px;
+padding-top: 3.1875rem;
+}
+body {
+/* color: #959595; */
+overflow-x: hidden;
+}
+.tab {
+background: #f6f6f6;
+border-right: 3px solid #fff;
+display: inline-block;
+float: left;
+width: 33.33%;
+zoom: 1;
+}
+ul {
+list-style: none;
+padding: 0;
+}
+Style Attribute {
+display: block;
+position: static;
+visibility: visible;
+}
+.icon, .mfp-close.icon {
+font-family: 'trapit';
+speak: none;
+font-style: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+line-height: 1;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+.tab.active a.active {
+color: #fff;
+}
+.tab a {
+color: #4a4a4a;
+display: block;
+font-weight: 600;
+padding: 9px 0;
+outline: none;
+text-align: center;
+text-transform: uppercase;
+font-size: 14px;
+font-size: 0.875rem;
+line-height: 28px;
+line-height: 1.75rem;
+}
+a {
+color: #00a69c;
+text-decoration: none;
+}
+* {
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+.style3 {
+color: #000000;
+font-size: 12pt;
+font-family: Arial;
+}
+media="all"
+.inner-container {
+position: relative;
+height: 100%;
+width: 100%;
+}
+media="all"
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
+}
+media="all"
+.search-form fieldset {
+border: 1px solid #dadada;
+height: 2.575em;
+position: relative;
+}
+fieldset {
+display: block;
+-webkit-margin-start: 2px;
+-webkit-margin-end: 2px;
+-webkit-padding-before: 0.35em;
+-webkit-padding-start: 0.75em;
+-webkit-padding-end: 0.75em;
+-webkit-padding-after: 0.625em;
+border: 2px groove threedface;
+border-image-source: initial;
+border-image-slice: initial;
+border-image-width: initial;
+border-image-outset: initial;
+border-image-repeat: initial;
+min-width: -webkit-min-content;
+}
+table.lamp
+{
+width:100%;
+padding:0px;
+border:1px solid #d4d4d4;
+}
+
+table.lamp th
+{
+color:#000000;
+background-color:white;
+padding:10px;
+padding-right:5px;
+}
+
+table.lamp td
+{
+padding:4px;
+padding-left:0px;
+padding-right:10px;
+background-color:#ffffff;
+}
+
+table.tecspec th,table.tecspec td{
+	border:1px solid #d4d4d4;padding:5px;padding-top:7px;padding-bottom:7px;vertical-align:top;text-align:left;
+}
+
+table.reference,table.tecspec{
+	border-collapse:collapse;width:100%;
+}
+
+table.reference tr:nth-child(odd)	{background-color:#f1f1f1;}
+table.reference tr:nth-child(even)	{background-color:#ffffff;}
+
+table.reference tr.fixzebra			{background-color:#f1f1f1;}
+
+table.reference th{
+	color:#ffffff;background-color:#555555;border:1px solid #555555;padding:3px;vertical-align:top;text-align:left;
+}
+
+table.reference th a:link,table.reference th a:visited{
+	color:#ffffff;
+}
+
+table.reference th a:hover,table.reference th a:active{
+	color:#EE872A;
+}
+
+table.reference td{
+	border:1px solid #d4d4d4;padding:5px;padding-top:7px;padding-bottom:7px;vertical-align:top;
+}
+
+table.reference td.example_code
+{
+vertical-align:bottom;
+}
+
+table.summary
+{
+border:1px solid #d4d4d4;
+padding:5px;
+font-size:100%;
+color:#555555;
+background-color:#fafad2;
+}
+
+

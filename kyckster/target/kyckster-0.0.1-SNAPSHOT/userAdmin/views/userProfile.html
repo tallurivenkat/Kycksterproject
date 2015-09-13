@@ -1,0 +1,156 @@
+<div class="row ng-cloak newton-content">
+
+	<alert-with-html data-error-prefix="<strong>Failure retrieving user profile from server</strong> (refresh page to retry): "
+		 	data-error-msg="userProfileError" data-error-msg-html="userProfileErrorHtml"></alert-with-html>
+
+	<div class="roundbox-outer">
+		<div class="roundbox-title text-center" style="padding-top: 6px; background-color: rgb(112, 143, 189); color: #FFFFFF;">
+			<label for="userAttuid">{{userProfile.firstName}} {{userProfile.lastName}}&nbsp;&nbsp;</label><span>&nbsp;&nbsp;&nbsp;({{userProfile.attUid}})</span>
+		</div>
+	</div>
+
+	<div class="roundbox-outer">
+		<div class="roundbox-title">
+			<h5>Profile Attributes</h5>
+		</div>
+		<div class="roundbox-content">
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="roundbox-outer">
+						<div class="roundbox-title">
+							<h5>Role(s)</h5>
+						</div>
+						<div class="roundbox-content">
+							<ul ng-repeat="role in userProfile.roleList"
+								style="list-style-type: none; padding-left:5px;">
+								<li style="margin-bottom: -10px;">{{role}}</li>
+							</ul>
+						</div>
+					</div>
+					
+<!--  Not needed anymore?  Covered in main title -->
+					<label><input ng-model="userProfile.lcmFlag" type="checkbox"/>&nbsp;Life Cycle Management Team</label>
+ 				</div>
+
+				<div class="col-md-4">
+					<div class="roundbox-outer">
+						<div class="roundbox-title">
+							<h5>Workgroups(s)</h5>
+						</div>
+						<div class="roundbox-content">
+							<ul ng-repeat="workgroup in userProfile.workgroupList"
+								style="list-style-type: none; padding-left:5px;">
+								<li style="margin-bottom: -10px;">{{workgroup}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="roundbox-outer">
+						<div class="roundbox-title">
+							<h5>Strata</h5>
+						</div>
+						<div class="roundbox-content">
+							<ul ng-repeat="strata in userProfile.strataList"
+								style="list-style-type: none; padding-left:5px;">
+								<li style="margin-bottom: -10px;">{{strata}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<div us-spinner="{radius:9, width:5, length: 12, corners: 1, top: '-15px;', left: 'auto', className: 'spinner'}"></div>
+			
+
+	<div class="roundbox-outer">
+		<div class="roundbox-title">
+			<h5>Page Customizations</h5>
+		</div>
+		<div class="roundbox-content">
+		
+			<div class="row">
+				<label class="newton-label">Default Dashboard Search:&nbsp;</label> 					
+				<!-- ng-repeat creates it's own scope 
+				     http://stackoverflow.com/questions/16265993/setting-and-getting-bootstrap-radio-button-inside-angular-repeat-loop  -->
+				<div class="btn-group">
+					<button ng-repeat="dashtype in dashboardSearchTypes" ng-model="$parent.userProfile.dashboardSearchTypeDefault" ng-click="$parent.dashboardSearchDefaultChanged()" btn-radio="dashtype.name"  class="btn btn-default">{{dashtype.name}}</button>
+				</div>
+				<div ng-switch on="userProfile.dashboardSearchTypeDefault" style="margin-right: 15px; display: inline-block;">
+					<div ng-switch-when="Customer">
+						<input  class="form-control" type="text" ng-model="userProfile.dashboardSearchValue['Customer'].name" style="display: inline-block;">
+					</div>
+					<div ng-switch-when="Agent">
+						<div class="dropdown">
+							<select class="dropdown-select form-control" ng-model="userProfile.dashboardSearchValue['Agent']" ng-options="a.name for a in agentList"></select>
+						</div>
+					</div>
+					<div ng-switch-when="Workgroup">
+						<div class="dropdown">
+							<select class="dropdown-select form-control" ng-model="userProfile.dashboardSearchValue['Workgroup']" ng-options="w.name for w in workgroupList"></select>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-4">
+					<div class="roundbox-outer">
+						<div class="roundbox-title">
+							<h5>USRP Orders</h5>
+							<div class="pull-right">
+								<button class="btn btn-xs btn-default" ng-model="userProfile.searchOrderTypeDefault" btn-radio="'{{searchOrderTypes[0].name}}'"  ng-click="defaultTabChanged()"  style="margin-right: 5px; margin-top: 6px;">Default Tab</button>
+							</div>
+						</div>
+						<div class="roundbox-content" style="padding: 0px;">
+							<table style="width: 100%;" grid-view-dt class="table table-striped table-hover data-table saved-search-table" id="savedSearchTableUSRP"
+								table-instance="savedSearchTables.USRP"	row-data="userProfile.savedSearchRowData.USRP"  fire-detail="tableCallback(data)"></table>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-md-4">
+					<div class="roundbox-outer">
+						<div class="roundbox-title">
+							<h5>Service Requests</h5>
+							<div class="pull-right">
+								<button class="btn btn-xs btn-default" ng-model="userProfile.searchOrderTypeDefault" btn-radio="'{{searchOrderTypes[1].name}}'"  ng-click="defaultTabChanged()" style="margin-right: 5px; margin-top: 6px;">Default Tab</button>
+							</div>
+						</div>
+						<div class="roundbox-content" style="padding: 0px;">
+							<table style="width: 100%;" grid-view-dt class="table table-striped table-hover data-table saved-search-table" id="savedSearchTableSR"
+								table-instance="savedSearchTables.SR"	row-data="userProfile.savedSearchRowData.SR"  fire-detail="tableCallback(data)"></table>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-4">
+					<div class="roundbox-outer">
+						<div class="roundbox-title">
+							<h5>Customer Requests</h5>
+							<div class="pull-right">
+								<button class="btn btn-xs btn-default" ng-model="userProfile.searchOrderTypeDefault" btn-radio="'{{searchOrderTypes[2].name}}'"  ng-click="defaultTabChanged()"  style="margin-right: 5px; margin-top: 6px;">Default Tab</button>
+							</div>
+						</div>
+						<div class="roundbox-content" style="padding: 0px;">
+							<table style="width: 100%;" grid-view-dt class="table table-striped table-hover data-table saved-search-table" id="savedSearchTableCR"
+								table-instance="savedSearchTables.CR"	row-data="userProfile.savedSearchRowData.CR"  fire-detail="tableCallback(data)"></table>
+						</div>
+					</div>
+				</div>
+			
+
+<!-- Keep this around for a while in case we want to try out a full table view				
+					<h5>Or is something like this better with expand/collapse sections? (barely functional, but you get the idea)</h5>
+					<table grid-view-dt class="table table-striped table-hover data-table" id="savedSearchTable"
+							table-instance="savedSearchTable"	row-data="userProfile.savedSearchRowData" fire-detail="tableCallback(data)"></table>
+ -->							
+			</div>
+		</div>
+	</div>
+</div>		

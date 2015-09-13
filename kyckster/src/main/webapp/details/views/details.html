@@ -1,0 +1,28 @@
+<div style="height: auto;">
+    <div class="row"  style="padding-left: 20px;">
+    
+		<!-- Alert shows when a retrieval error ocurrs trying to get the picklist values -->
+		<div style="margin: 16px 16px 0px 16px;" alert-with-html data-error-prefix="<strong>Error retrieving detailed order info from server</strong> (refresh page to retry): "
+		 	data-error-msg="detailsError" data-error-msg-html="detailsErrorHtml"></div>
+
+	
+	    <div ng-switch="orderType">
+			<div ng-switch-when="Orders">
+				<div ng-include="'app/details/views/orderDetails.html'"></div>
+			</div>
+			<div ng-switch-when="CR">
+				<div ng-include="'app/details/views/crDetails.html'"></div>
+			</div>
+			<div ng-switch-when="SR">
+				<div ng-include="'app/details/views/srDetails.html'"></div>
+			</div>
+			<div ng-switch-when="EFMSCR">
+				<div ng-include="'app/details/views/efmsCrDetails.html'"></div>
+			</div>
+			<div ng-switch-when="EFMSSR">
+				<div ng-include="'app/details/views/efmsSrDetails.html'"></div>
+			</div>
+		</div>
+		
+    </div>
+</div>

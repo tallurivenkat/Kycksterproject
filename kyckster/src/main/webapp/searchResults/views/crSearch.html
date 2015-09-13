@@ -1,0 +1,377 @@
+<div class="roundbox-outer">
+	<div class="roundbox-title">
+		<div class="buttons pull-right">
+			<a href="" class="btn" id="searchData"
+				ng-click="search(searchCriteria.selectedOrderType.name)"><span
+				class="text" style="font-size: 14px; padding-left: 5px;">Search</span>
+			</a>
+		</div>
+		<ul class="nav nav-tabs">
+			<li id="ordersTab" class=""><a ui-sref="results.orders"
+				ng-model="orderTabLabel" data-toggle="tab" data-target="#tab3"
+				ng-click="searchCriteria.selectedOrderType = searchOrderTypes[0]; clearUSRPData();">Service
+					Orders</a></li>
+			<li id="srTab" class="">
+				<a ui-sref="results.sr" ng-model="srTabLabel" data-toggle="tab"
+							data-target="#tab4"  
+							ng-click="searchCriteria.selectedOrderType = searchOrderTypes[1]; clearSRCriteria();">{{srTabLabel}}</a>
+			</li>
+			<li id="crTab" class="active"><a ui-sref="results.cr"
+				ng-model="crTabLabel" data-toggle="tab" data-target="#tab5"
+				ng-click="searchCriteria.selectedOrderType = searchOrderTypes[2]; clearCRCriteria();">Customer
+					Requests</a></li>
+		</ul>
+	</div>
+
+	<div class="roundbox-content tab-content">
+
+		<div id="tab5" class="tab-pane active">
+		
+			<accordion>
+				<div collapse="resultsets.CR.isCriteriaCollapsed" class="row panel-collapse collapse" style="margin-left: 15px;">
+	
+					<div class="row"
+						style="border-bottom: solid; padding-bottom: 1%; padding-top: 1%; border-width: 1px; color: rgb(158, 158, 158);">
+	
+						<div class="col-lg-4 col-md-5 col-sm-6">
+							<div class="col-lg-5 col-md-6 col-sm-5"
+								style="padding-left: 0px; padding-right: 0px; text-align: right;">
+								<label for="" class="newton-label" style="">My Saved
+									Searches</label>
+							</div>
+							<div class="col-lg-7 col-md-6 col-sm-7">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control"
+										ng-model="crSearch.mySavedSearches"
+										ng-options="c.search for c in crSavedSearchList" ng-change=""
+										style="width: 100%;"></select>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-4 col-sm-6" style="padding-left: 0px;">
+							<button type="button" class="btn btn-default"
+								style="margin-top: -1px;" data-toggle="modal"
+								data-target="#crSaveSearchModal">Save Search</button>
+						</div>
+	
+					</div>
+	
+					<!-- Modal for Save Search -->
+					<div class="modal fade" id="crSaveSearchModal" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Save Search</h4>
+								</div>
+								<div class="modal-body">
+	
+									<div class="row">
+										<div class="col-md-3">
+											<label for="saveSearchAs" class="newton-label">Save
+												Search As</label>
+										</div>
+										<div class="col-md-6">
+											<input type="text" ng-model="crSearch.saveSearch"
+												class="form-control">
+										</div>
+									</div>
+									<div class="row" style="margin-top: 10px;">
+										<div class="col-md-3">
+											<label for="shareSavedSearch" class="newton-label">Shared
+												Saved Search</label>
+										</div>
+										<div class="col-md-4">
+											<input type="radio" name="Yes" value=""><label>Yes</label>
+											<input type="radio" name="No" value=""><label>No</label>
+										</div>
+									</div>
+	
+								</div>
+	
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Save</button>
+								</div>
+							</div>	<!-- /.modal-content -->
+						</div> <!-- /.modal-dialog -->
+					</div>	<!-- /.modal -->
+	
+	
+					<div class="row">
+	
+						<!-- Left Column -->
+						<div class="col-lg-6 col-md-6 search-left-column">
+	
+							<!-- Request Identifier - Optional field -->
+							<div class="row margin-bottom-10px margin-top-20px">
+								<div class="col-lg-4 col-md-5 searchFieldLabel">
+									<div ng-switch on="lcmTeamIndicator">
+										<div ng-switch-when="true">
+											<label for="requestIdentifier" class="newton-label">NextGen
+												Customer Request ID</label>
+										</div>
+										<div ng-switch-when="false">
+											<label for="requestIdentifier" class="newton-label">OCX
+												Customer Request ID</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-7 col-md-7" style="padding: 0px;">
+									<input type="text" ng-model="crSearch.customerRequestId"
+										class="form-control">
+								</div>
+							</div>
+	
+							<!-- Status of Customer Request Type
+											 This field is only enabled if the Customer Request Type is set to ‘NX CR Id’ or ‘EFMS CR Id’ 
+											 Status Values for NX CR Id:  (NULL, In-Progress, Completed, Cancelled) 
+											 Status Values for EFMS CR Id:  (NULL, In-Progress, Completed, Cancelled)-->
+	
+							<div class="row margin-bottom-10px">
+								<div class="col-lg-4 col-md-5 searchFieldLabel">
+									<div ng-switch on="lcmTeamIndicator">
+										<div ng-switch-when="true">
+											<label for="statusCustomerRequestType" class="newton-label">NextGen
+												Customer Request Status</label>
+										</div>
+										<div ng-switch-when="false">
+											<label for="statusCustomerRequestType" class="newton-label">OCX
+												Customer Request Status</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-7 col-md-7" style="padding: 0px;">
+									<div class="dropdown" style="width: 100%;">
+										<select class="dropdown-select form-control" ng-model="crSearch.crStatus"
+											ng-options="c.name for c in crStatusList" ng-change=""
+											style="width: 100%;">
+											<option style="display:none" value=""></option>
+											</select>
+									</div>
+								</div>
+							</div>
+	
+	
+	
+							<div class="row margin-bottom-10px">
+								<div class="col-lg-4 col-md-5 searchFieldLabel">
+									<label for="associatedId" class="newton-label">Associated
+										Identifiers</label>
+								</div>
+								<div class="col-lg-7 col-md-7" style="padding: 0px;">
+									<div class="dropdown" style="width: 100%;">
+										<select class="dropdown-select form-control"
+											ng-model="crSearch.crAssociatedIdType"
+											ng-options="c.name for c in crAssociatedIdList" ng-change=""
+											style="width: 100%;">
+											<option style="display:none" value=""></option></select>
+									</div>
+								</div>
+							</div>
+	
+							<!-- Request Identifier - Optional field -->
+							<div class="row margin-bottom-10px"
+								ng-show="crSearch.crAssociatedIdType.name !== ''">
+								<div class="col-lg-4 col-md-5 searchFieldLabel">
+									<label for="requestIdentifier" class="newton-label">{{crSearch.crAssociatedIdType.name}}</label>
+								</div>
+								<div class="col-lg-7 col-md-7" style="padding: 0px;">
+									<input type="text" ng-model="crSearch.crAssociatedId"
+										class="form-control">
+								</div>
+							</div>
+	
+	
+							<!-- Customer Name -->
+							<div class="row margin-bottom-10px">
+								<div class="col-lg-4 col-md-5 searchFieldLabel">
+									<label for="customerName" class="newton-label">Customer
+										Name</label>
+								</div>
+								<div class="col-lg-7 col-md-7" style="padding: 0px;">
+									<input type="text" ng-model="crSearch.customerName"
+										class="form-control">
+								</div>
+							</div>
+	
+						</div>
+	
+						<!-- Right Column -->
+						<div class="col-lg-6 col-md-6 search-right-column">
+	
+							<!-- Date Selection -->
+							<div class="row margin-bottom-10px margin-top-20px">
+								<div class="col-lg-4 col-md-5 searchFieldLabel">
+									<label for="dateSelection" class="newton-label">Date
+										Selection</label>
+								</div>
+								<div class="col-lg-7 col-md-7" style="padding: 0px;">
+									<div class="dropdown" style="width: 100%;">
+										<select class="dropdown-select form-control"
+											ng-model="crSearch.crDateSelection"
+											ng-options="c.name for c in crDateSelectionList" ng-change=""
+											style="width: 100%;">
+											<option style="display:none" value=""></option>
+											</select>
+									</div>
+								</div>
+							</div>
+	
+							<!-- Selected Date Type -->
+							<!-- <div class="row margin-bottom-10px" ng-show="showDateForCR()"> -->
+							<div class="row margin-bottom-10px"
+								ng-show="crSearch.crDateSelection.name !== ''">
+								<div class="col-lg-4 col-md-5 searchFieldLabel">
+									<label for="crDate" class="newton-label">{{crSearch.crDateSelection.name}}</label>
+								</div>
+								<div class="col-lg-8 col-md-7 col-sm-12 col-xs-12"
+									style="padding: 0px; display: inline-table;">
+									<div class="col-md-6 newton-datepicker-from">
+										<div class="input-group date" id="crSDate"
+											data-date="{{startDate}}" data-date-format="mm/dd/yyyy">
+											<input type="text" id="crStartDate" class="form-control"
+												ng-model="crSearch.startDate" bootstrap-datepicker
+												placeholder="From"> <span
+												class="input-group-addon add-on"><i
+												class="fa fa-calendar"></i><span ng-click="pickCrStartDate()"></span></span>
+										</div>
+									</div>
+									<div class="col-md-6 newton-datepicker-to">
+										<div class="input-group date" id="crEDate"
+											data-date="{{endtDate}}" data-date-format="mm/dd/yyyy">
+											<input type="text" id="crEndDate" class="form-control"
+												ng-model="crSearch.endDate" bootstrap-datepicker
+												placeholder="To"> <span
+												class="input-group-addon add-on"><i
+												class="fa fa-calendar"></i><span ng-click="pickCrEndDate()"></span></span>
+										</div>
+									</div>
+								</div>
+							</div>
+	
+							<div ng-show="wrongCrStartDateEntered">
+								<div class="row margin-bottom-10px margin-top-20px">
+									<div class="col-md-3"></div>
+									<div class="col-md-8" style="padding: 0px; margin: 0px;">
+										<span style="color: red;">Start Date must be earlier
+											than End Date</span>
+									</div>
+								</div>
+							</div>
+	
+							<div ng-show="wrongCrEndDateEntered">
+								<div class="row margin-bottom-10px margin-top-20px">
+									<div class="col-md-3"></div>
+									<div class="col-md-8" style="padding: 0px; margin: 0px;">
+										<span style="color: red;">End Date must be later than
+											Start Date</span>
+									</div>
+								</div>
+							</div>
+	
+	
+							<!-- MCN -->
+							<div class="row margin-bottom-10px">
+								<div class="col-lg-4 col-md-5 searchFieldLabel">
+									<label for="mcn" class="newton-label">MCN</label>
+								</div>
+								<div class="col-lg-7 col-md-7" style="padding: 0px;">
+									<input type="text" ng-model="crSearch.mcn" class="form-control">
+								</div>
+							</div>
+	
+							<!-- Market Strata - Optional
+										 Values: (NULL, Government, Retail, Wholesale) -->
+							<div class="row margin-bottom-10px" ng-show="lcmTeamIndicator">
+								<div class="col-lg-4 col-md-5 searchFieldLabel">
+									<label for="crMarketStrata" class="newton-label">Strata</label>
+								</div>
+								<div class="col-lg-7 col-md-7" style="padding: 0px;">
+									<div class="dropdown" style="width: 100%;">
+										<select class="dropdown-select form-control"
+											ng-model="crSearch.crMarketStrata"
+											ng-options="c.name for c in crMarketStrataList" ng-change=""
+											style="width: 100%;">
+											<option style="display:none" value=""></option></select>
+									</div>
+								</div>
+							</div>
+	
+	
+							<!-- Order Owner - Optional -->
+							<div class="row margin-bottom-10px" ng-show="lcmTeamIndicator">
+								<div class="col-lg-4 col-md-5 searchFieldLabel">
+									<label for="orderOwner" class="newton-label">Order Owner</label>
+								</div>
+								<div class="col-lg-7 col-md-7" style="padding: 0px;">
+									<input type="text" ng-model="crSearch.orderOwner"
+										class="form-control" placeholder="Enter ATTUID">
+								</div>
+							</div>
+	
+						</div>
+					</div>
+				</div>
+			<!-- criteria -->
+
+				<!-- Begin section for table results -->
+				<a class="criteriaCollapser accordion-toggle"
+					ng-show="shouldCollapserBeVisible('CR')"
+					ng-click="resultsets.CR.isCriteriaCollapsed = !resultsets.CR.isCriteriaCollapsed"
+					title="Expand or collapse search criteria"> <span class="icon">
+						<i
+						ng-class="(resultsets.CR.isCriteriaCollapsed) ? 'fa fa-arrow-down' : 'fa fa-arrow-up'"></i>
+				</span>
+				</a>
+			</accordion>
+
+			<div
+				us-spinner="{radius:9, width:5, length: 12, corners: 1, top: '-15px;', left: 'auto', className: 'spinner'}"></div>
+
+			<alert-with-html data-error-prefix="<strong>Error: </strong>"
+				data-error-msg="resultsets.CR.searchRequestErrorMsg"
+				data-error-msg-html="resultsets.CR.searchRequestErrorMsgHtml"></alert-with-html>
+
+			<!--
+				This table used to also have the table-bordered class but that caused only FireFox to draw the table
+				with miscalculate the table widths causing a horizontal scrollbar to always appear and the table width
+				to continually increase by a few pixels each time it was redrawn.  Rather than fix the table's code
+				just take the class (which only seems to affect style) out.
+			 -->
+			<table class="table table-striped table-hover data-table"
+				id="resultsTableCR" search-result-table="resultsCR"
+				table-data="resultsets['CR'].resultData"
+				fire-detail="getDetailsResult(orderType,id)">
+			</table>
+		</div>
+	</div> <!-- roundbox content -->
+		
+		<!-- roundbox content -->
+
+		<!-- Modal - Error Message -->
+
+		<div class="modal fade" id="searchCriteriaAlertModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Search Criteria Error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Please Select Search Criteria values...</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+	</div>

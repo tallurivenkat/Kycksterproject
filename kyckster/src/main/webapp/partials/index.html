@@ -1,0 +1,39 @@
+<div class="pull-right">
+	<a href="#!/create" class="btn btn-default" ng-show="hasRole('admin')" title="Create"><span class="glyphicon glyphicon-plus"></span></a>
+</div>
+<div class="page-header">
+	<h3>New Content Info</h3>
+</div>
+
+<!-- <div ng-repeat="newsEntry in newsEntries"> -->
+<!-- 	<hr /> -->
+<!-- 	<div class="pull-right"> -->
+<!-- 		<a href="" ng-click="deleteEntry(newsEntry)" class="btn btn-xs btn-default" ng-show="hasRole('admin')" title="delete"><span class="glyphicon glyphicon-trash"></span></a> -->
+<!-- 		<a href="#!/edit/{{newsEntry.id}}" class="btn btn-xs btn-default" ng-show="hasRole('admin')" title="edit"><span class="glyphicon glyphicon-pencil"></span></a> -->
+<!-- 	</div> -->
+<!-- 	<p>{{newsEntry.sytemDate}}</p> -->
+<!-- 	<p>{{newsEntry.content}}</p> -->
+<!-- </div> -->
+
+<!-- <!-- {{newsEntry}} --> 
+<!-- <hr /> -->
+
+<table class="reference" style="width:100%">
+			<tbody>
+			<tr>
+	<th>ID</th>
+	<th>Date</th>
+	<th>Content</th>
+	<th>Delete</th>
+	<th>Edit</th>
+</tr>
+			<tr ng-repeat="newsEntry in newsEntries">
+			<td>{{ newsEntry.id }}</td>
+    <td>{{ newsEntry.date | date}}</td>
+    <td>{{ newsEntry.content }}</td>
+     <td><a href="" ng-click="deleteEntry(newsEntry)" class="btn btn-xs btn-default" ng-show="hasRole('admin')" title="delete"><span class="glyphicon glyphicon-trash"></span></a> </td>
+      <td><a href="#!/edit/{{newsEntry.id}}" class="btn btn-xs btn-default" ng-show="hasRole('admin')" title="edit"><span class="glyphicon glyphicon-pencil"></span></a></td>
+  </tr>
+		</tbody></table>
+		
+	

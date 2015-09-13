@@ -1,0 +1,29 @@
+/***********************************************
+     Home-grown responsive style using @media
+
+	 Using @media (size){} gives us the ability to 
+	 manipulate any element in the screen based on the
+	 size of the screen. This can be useful when dealing
+	 with small or large screens.
+************************************************/
+
+@media (max-width: 991px) {	
+	
+	.searchFieldLabel {
+		text-align: left;
+		padding-left: 0px;
+		padding-bottom: 2px;
+	}
+	
+}
+
+@media (max-width: 700px) {	
+
+	.table-responsive {
+	    width: 100%;
+	    margin-bottom: 15px;
+	    overflow-x: hidden;
+	    overflow-y: hidden;
+	    border: none;
+  	}
+}

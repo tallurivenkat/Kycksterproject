@@ -1,0 +1,19 @@
+	<!-- Alert shows when a retrieval error ocurrs trying to get the error values -->
+	<div class="alert alert-danger" style="margin-top: 16px;" ng-show="errorMsg">
+		<!-- Cannot use bootstrap's data-dismiss="alert" since it removes the DOM content -->
+		<button class="close"  ng-click="errorMsg=null;isHtmlErrorExpanded=false">
+			<span class="icon"><i class="fa fa-times"></i></span>
+		</button>
+		<!-- Use of accordion here causes transclusion errors.  Workaround is to use ng-bind-hml -->
+		<!-- See directive js for details -->
+		<accordion>
+			<a class="accordion-toggle"	style="cursor: pointer;" ng-click="isHtmlErrorExpanded = !isHtmlErrorExpanded"	ng-show="errorMsgHtml"	title="Expand to show full error">
+				<span class="icon"><i ng-class="(isHtmlErrorExpanded) ? 'fa fa-minus' : 'fa fa-plus'"></i></span>
+			</a>
+<!-- 			<span ng-transclude></span>{{errorMsg}}  -->
+			<span ng-bind-html="errorPrefix"></span>{{errorMsg}}
+			<div class="row panel-collapse collapse" collapse="!isHtmlErrorExpanded" style="margin-left: 15px;">
+				<div ng-bind-html="errorMsgHtmlStripped"></div>
+			</div>
+		</accordion>
+	</div>

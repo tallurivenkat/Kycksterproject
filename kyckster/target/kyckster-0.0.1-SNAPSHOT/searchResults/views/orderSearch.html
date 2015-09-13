@@ -1,0 +1,519 @@
+<div class="roundbox-outer">
+	<div class="roundbox-title">
+		<div class="buttons pull-right">
+			<!--Had to convert the A to BUTTON so ng-disabled would work
+				http://onehungrymind.com/quick-note-ng-disabled-and-anchor-tags-oh-noes/
+				Button will now be disabled when there's a picklist retrieval error or we haven't received them yet.
+				Needs to be duped across all tabs
+			 -->
+			<!--  
+				<button class="btn" id="searchData" ng-click="search(searchCriteria.selectedOrderType.name)"
+					style="background-color: #fdfdfd;"
+				 	ng-disabled="picklistError || usrpOrderStatusList === undefined">
+					<span class="text" style="font-size: 14px; padding-left: 5px;">{{outstandingSearchRequest == null ? 'Search' : 'Cancel'}}</span>
+				</button>
+			-->
+			<a href="" class="btn" id="searchData"
+				ng-click="search(searchCriteria.selectedOrderType.name)"><span
+				class="text" style="font-size: 14px; padding-left: 5px;"><i class="fa fa-search"></i>&nbsp;Search</span>
+			</a>
+		</div>
+		<ul class="nav nav-tabs">
+			<li id="ordersTab" class="active"><a data-toggle="tab"
+				data-target="#tab1" ui-sref="results.orders" ng-model="orderTabLabel" 
+				ng-click="searchCriteria.selectedOrderType = searchOrderTypes[0]; clearUSRPData();">Service
+					Orders</a></li>
+			<li id="srTab" class=""><a data-toggle="tab" data-target="#tab2"
+				ui-sref="results.sr" ng-model="srTabLabel" 
+				ng-click="searchCriteria.selectedOrderType = searchOrderTypes[1]; clearSRCriteria();">{{srTabLabel}}</a></li>
+				
+			<li id="crTab" class=""><a data-toggle="tab" data-target="#tab3"
+				ui-sref="results.cr" ng-model="crTabLabel" 
+				ng-click="searchCriteria.selectedOrderType = searchOrderTypes[2]; clearCRCriteria();">Customer
+					Requests</a></li>
+		</ul>
+	</div>
+
+	<div class="roundbox-content tab-content">
+	       <div id="flyoutpanel">
+	            <div id="flyoutpanel-inner">
+	            	<div class="row" >
+		               <span style="display: block; padding: 8px 15px 0px 15px;" >
+		               Select an existing name to perform search...<br>
+		               Or type a new name to save the current search criteria.</span>
+ 	               </div>
+	            	<div class="row">
+						<div class="dropdown col-sm-6">
+							<select class="dropdown-select form-control"
+									ng-model="$parent.savedSearchesSelection"
+									ng-options="o.name for o in savedSearches['USRP']" 
+									style="width: 100%;"></select>
+						</div>
+						<div class="col-sm-6">
+ 							<button  type="button" class="btn btn-default">Save</button>&nbsp;&nbsp;
+							<label style="font-weight: normal; vertical-align: bottom;"><input ng-model="savedSearch_Share" type="checkbox"/><span  style="vertical-align: text-bottom;">&nbsp;Shared?</span></label>
+						</div>
+					</div>
+	            </div>
+	            <div id="flyoutpanel-button" ng-click='toggleSavedSearchPanel()'>
+	                <i class="fa fa-cogs"></i>
+	            </div>
+	        </div>
+
+		<div id="tab1" class="tab-pane active">
+
+			<!-- 
+					Accordions now work in ui.bootstrap 3 with version 0.10.0
+					Define your div as panel-collapse and a dependency as 'collapse'.
+					Must be enclosed by accordion element.  Does NOT work with bootstrap 2
+					Some helpful information:
+					https://github.com/angular-ui/bootstrap/tree/gh-pages
+					http://sravi-kiran.blogspot.com/2013/10/MakingBootstrapUiAccordionWorkWithBootstrap3.html
+					http://stackoverflow.com/questions/19665918/angularjs-1-2-bootstrap-3-0-panel-collapse-not-working
+					http://plnkr.co/edit/BZa5CUVdltFk3k8XrxdO?p=preview
+					http://stackoverflow.com/questions/17906951/how-to-create-an-angular-ui-bootstrap-accordion-group-with-no-body
+					 -->
+			<accordion>
+				<div class="row panel-collapse collapse"
+				collapse="resultsets.USRP.isCriteriaCollapsed"
+				style="margin-left: 15px;">
+
+					<div class="row"
+					style="border-bottom: solid; padding-bottom: 1%; padding-top: 1%; border-width: 1px; color: rgb(158, 158, 158);">
+
+						<div class="col-lg-4 col-md-5 col-sm-6">
+							<div class="col-lg-5 col-md-6 col-sm-5"
+								style="padding-left: 0px; padding-right: 0px; text-align: right;">
+								<label for="" class="newton-label" style="">Saved Searches</label>
+							</div>
+							<div class="col-lg-7 col-md-6 col-sm-7">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control"
+										ng-model="$parent.savedSearchesSelection"
+										ng-options="o.name for o in savedSearches['USRP']" 
+										style="width: 100%;"></select>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-4 col-sm-6" style="padding-left: 0px;">
+							<button type="button" class="btn btn-default"
+								style="margin-top: -1px;" data-toggle="modal"
+								data-target="#saveSearchModal">Save Search</button>
+						</div>
+					</div>
+ 					<!-- Modal for Save Search -->
+					<div class="modal fade" id="saveSearchModal" tabindex="-1"
+					role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">Save Search</h4>
+								</div>
+								<div class="modal-body">
+	
+									<div class="row">
+										<div class="col-md-3">
+											<label  style="text-align: right; font-weight: normal; vertical-align: bottom;" for="saveSearchAs" class="newton-label">Search Name:</label>
+										</div>
+										<div class="col-md-6">
+											<input type="text" ng-model="saveSearch_Name"
+												class="form-control">
+											<label style="font-weight: normal; vertical-align: bottom;"><input ng-model="saveSearch_Share" type="checkbox"/><span  style="vertical-align: text-bottom;">&nbsp;Shared?</span></label>
+										</div>
+									</div>
+	
+								</div>
+	
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Save</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+
+					<!-- Left Column -->
+					<div class="col-lg-6 col-md-6 search-left-column">
+
+						<!-- Service Order ID -->
+						<div class="row margin-bottom-10px margin-top-20px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="serviceOrderIdentifier" class="newton-label">Service Order ID</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<input type="text" ng-model="orderSearch.serviceOrderId"
+									class="form-control">
+							</div>
+						</div>
+
+
+						<div class="row margin-bottom-10px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="statusServiceOrderType" class="newton-label">Service Order Status</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control" ng-model="orderSearch.orderStatus"
+										ng-options="o.name for o in orderStatusList" ng-change=""
+										style="width: 100%;">
+										<option style="display:none" value=""></option></select>
+								</div>
+							</div>
+						</div>
+
+						<div class="row margin-bottom-10px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="associatedId" class="newton-label">Associated
+									Identifiers</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control"
+										ng-model="orderSearch.orderAssociatedIdType"
+										ng-options="o.name for o in orderAssociatedIdList" ng-change=""
+										style="width: 100%;">
+										<option style="display:none" value=""></option></select>
+								</div>
+							</div>
+						</div>
+
+						<!-- Request Identifier - Optional field -->
+						<div class="row margin-bottom-10px"
+							ng-show="orderSearch.orderAssociatedIdType.name !== ''">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderIdentifier" class="newton-label">{{orderSearch.orderAssociatedIdType.name}}</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<input type="text" ng-model="orderSearch.orderAssociatedId"
+									class="form-control">
+							</div>
+						</div>
+
+						<!-- Customer Name -->
+						<div class="row margin-bottom-10px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="customerName" class="newton-label">Customer
+									Name</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<input type="text" ng-model="orderSearch.customerName"
+									class="form-control">
+							</div>
+						</div>
+
+						<!-- Site Attribute
+									 Values:  NULL, Site Region, Site Name, Site City 
+								-->
+						<div class="row margin-bottom-10px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderSiteAttribute" class="newton-label">Site
+									Attribute</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control"
+										ng-model="orderSearch.orderSiteAttribute"
+										ng-options="o.name for o in orderSiteAttributeList" ng-change=""
+										style="width: 100%;"><option style="display:none" value=""></option></select>
+								</div>
+							</div>
+						</div>
+
+
+	
+						<div class="row margin-bottom-10px"
+							ng-show="orderSearch.orderSiteAttribute.name === 'Site Region'">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderSiteAttributeSelection" class="newton-label">{{orderSearch.orderSiteAttribute.name}}</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control"
+										ng-model="orderSearch.orderSiteRegion"
+										ng-options="o.name for o in orderSiteRegionList" ng-change=""
+										style="width: 100%;"><option style="display:none" value=""></option></select>
+								</div>
+							</div>
+						</div>
+
+		
+						<div class="row margin-bottom-10px"
+							ng-show="orderSearch.orderSiteAttribute.name === 'Site Name' || orderSearch.orderSiteAttribute.name === 'Site City'">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderOwner" class="newton-label">{{orderSearch.orderSiteAttribute.name}}</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<input type="text" ng-model="orderSearch.orderSiteNameCity"
+									class="form-control">
+							</div>
+						</div>
+
+						<!-- Site State/Province - Optional
+									 Values:  All US States (2-char ISO code) including territories and all Canadian Provinces (2-Char ISO code), NULL
+								-->
+						<div class="row margin-bottom-10px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderSiteStateProvince" class="newton-label">Site
+									State/Province</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control" ng-model="orderSearch.orderSiteState"
+										ng-options="o.name for o in orderSiteStateList | orderBy:'name'"
+										ng-change="" style="width: 100%;"><option style="display:none" value=""></option></select>
+								</div>
+							</div>
+						</div>
+
+						<!-- Site Country
+									 Values:  NULL, 2-char ISO code for all countries
+								-->
+						<div class="row margin-bottom-10px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderSiteCountry" class="newton-label">Site
+									Country</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control"
+										ng-model="orderSearch.orderSiteCountry"
+										ng-options="o.name for o in orderSiteCountryList" ng-change=""
+										style="width: 100%;"><option style="display:none" value=""></option></select>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- Right Column -->
+					<div class="col-lg-6 col-md-6 search-right-column">
+
+						<!-- Date Selection -->
+						<div class="row margin-bottom-10px margin-top-20px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="dateSelection" class="newton-label">Date
+									Selection</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control"
+										ng-model="orderSearch.orderDateSelection"
+										ng-options="o.name for o in orderDateSelectionList" ng-change=""
+										style="width: 100%;"><option style="display:none" value=""></option></select>
+								</div>
+							</div>
+						</div>
+
+						<!-- Selected Date Type -->
+						<div class="row margin-bottom-10px"
+							ng-show="orderSearch.orderDateSelection.name !== ''">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderDate" class="newton-label">{{orderSearch.orderDateSelection.name}}</label>
+							</div>
+							<div class="col-lg-8 col-md-7 col-sm-12 col-xs-12"
+								style="padding: 0px; display: inline-table;">
+								<div class="col-md-6 newton-datepicker-from">
+									<div class="input-group date" id="orderSDate"
+										data-date="{{startDate}}" data-date-format="mm/dd/yyyy">
+										<input type="text" id="orderStartDate" class="form-control"
+											ng-model="orderSearch.sDate" bootstrap-datepicker
+											placeholder="From"> <span
+											class="input-group-addon add-on"><i
+											class="fa fa-calendar"></i><span ng-click="pickOrderStartDate()"></span></span>
+									</div>
+								</div>
+								<div class="col-md-6 newton-datepicker-to">
+									<div class="input-group date" id="orderEDate"
+										data-date="{{endtDate}}" data-date-format="mm/dd/yyyy">
+										<input type="text" id="orderEndDate" class="form-control"
+											ng-model="orderSearch.eDate" bootstrap-datepicker
+											placeholder="To"> <span
+											class="input-group-addon add-on"><i
+											class="fa fa-calendar"></i><span ng-click="pickOrderEndDate()"></span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div ng-show="wrongOrderStartDateEntered">
+							<div class="row margin-bottom-10px margin-top-20px">
+								<div class="col-md-3"></div>
+								<div class="col-md-8" style="padding: 0px; margin: 0px;">
+									<span style="color: red;">Start Date must be earlier
+										than End Date</span>
+								</div>
+							</div>
+						</div>
+
+						<div ng-show="wrongOrderEndDateEntered">
+							<div class="row margin-bottom-10px margin-top-20px">
+								<div class="col-md-3"></div>
+								<div class="col-md-8" style="padding: 0px; margin: 0px;">
+									<span style="color: red;">End Date must be later than
+										Start Date</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- MCN Triplet-->
+						<div class="row margin-bottom-10px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="mcnTriplet" class="newton-label">MCN Triplet</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control"
+										ng-model="orderSearch.mcnTripletType"
+										ng-options="m.name for m in mcnTripletList"
+										style="width: 100%;"><option style="display:none" value=""></option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<!-- MCN/GRC/SOC -->
+						<div class="row margin-bottom-10px" ng-show="orderSearch.mcnTripletType.name !== ''">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="mcnGrcSoc" class="newton-label">{{orderSearch.mcnTripletType.name}}</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<input type="text" ng-model="orderSearch.mcn" class="form-control"
+									style="width: 50%; display: inline-block;"> <input
+									type="text" ng-model="orderSearch.grc" class="form-control"
+									style="width: 26%; display: inline-block;"> <input
+									type="text" ng-model="orderSearch.soc" class="form-control"
+									style="width: 20%; display: inline-block;">
+							</div>
+						</div>
+
+
+						<!-- Product Offering-->
+						<div class="row margin-bottom-10px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderProductOffering" class="newton-label">Product
+									Offering</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control"
+										ng-model="orderSearch.productOffering"
+										ng-options="p.name for p in productOfferingList"
+										style="width: 100%;"><option style="display:none" value=""></option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+
+
+						<!-- In Jeopardy 
+									 	 Values: (NULL, Yes) -->
+						<div class="row margin-bottom-10px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderJeopardy" class="newton-label">In Jeopardy</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control" ng-model="orderSearch.inJeopardy"
+										ng-options="j.name for j in jeopardyList" ng-change=""
+										style="width: 100%;"><option style="display:none" value=""></option></select>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- Strata
+									 Values: (NULL, Government, Retail, Wholesale)
+								-->
+						<div class="row margin-bottom-10px" ng-show="lcmTeamIndicator">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderMarketStrata" class="newton-label">Strata</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<div class="dropdown" style="width: 100%;">
+									<select class="dropdown-select form-control"
+										ng-model="orderSearch.orderMarketStrata"
+										ng-options="s.name for s in orderMarketStrataList" ng-change=""
+										style="width: 100%;"><option style="display:none" value=""></option></select>
+								</div>
+							</div>
+						</div>
+
+
+
+						<!-- Order Owner - Optional field -->
+						<div class="row margin-bottom-10px">
+							<div class="col-lg-4 col-md-5 searchFieldLabel">
+								<label for="orderOwner" class="newton-label">Order Owner</label>
+							</div>
+							<div class="col-lg-7 col-md-7" style="padding: 0px;">
+								<input type="text" ng-model="orderSearch.orderOwner"
+									class="form-control" placeholder="Enter ATTUID">
+							</div>
+						</div>
+
+					</div>
+				</div>
+				</div> <!-- collaps panel, all criteria -->
+
+				<a class="criteriaCollapser accordion-toggle"
+					ng-click="resultsets.USRP.isCriteriaCollapsed = !resultsets.USRP.isCriteriaCollapsed"
+					ng-show="shouldCollapserBeVisible('USRP')"
+					title="Expand or collapse search criteria"> <span class="icon">
+						<i
+						ng-class="(resultsets.USRP.isCriteriaCollapsed) ? 'fa fa-arrow-down' : 'fa fa-arrow-up'"></i>
+				</span>
+				</a>
+				
+			</accordion>
+
+			<div
+				us-spinner="{radius:9, width:5, length: 12, corners: 1, top: '-15px;', left: 'auto', className: 'spinner'}"></div>
+
+			<alert-with-html data-error-prefix="<strong>Error: </strong>"
+				data-error-msg="resultsets.USRP.searchRequestErrorMsg"
+				data-error-msg-html="resultsets.USRP.searchRequestErrorMsgHtml"></alert-with-html>
+
+			<!--
+							This table used to also have the table-bordered class but that caused only FireFox to draw the table
+							with miscalculate the table widths causing a horizontal scrollbar to always appear and the table width
+							to continually increase by a few pixels each time it was redrawn.  Rather than fix the table's code
+							just take the class (which only seems to affect style) out.
+						 -->
+			<table class="table table-striped table-hover data-table"
+				id="resultsTableUSRP" search-result-table="resultsUSRP"
+				table-data="resultsets['USRP'].resultData"
+				fire-detail="getDetailsResult(orderType,id)">
+			</table>
+		</div>
+		<!-- Tab -->
+	</div>
+	<!-- roundbox content -->
+
+	<!-- Modal - Error Message -->
+
+	<div class="modal fade" id="searchCriteriaAlertModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Search Criteria Error</h4>
+				</div>
+				<div class="modal-body">
+					<p>Please Select Search Criteria values...</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</div>

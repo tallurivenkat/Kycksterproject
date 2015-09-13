@@ -1,0 +1,273 @@
+<div style="height:auto;">
+	<div class="row newton-content" style="margin-left: 0px; margin-right: 0px;">
+			
+		<div id="dashboard-search" class="row" style="margin-left: 0px; margin-right: 0px;">
+				<div class="col-12-md">
+					<div class="roundbox-outer">
+						<div class="roundbox-content" style="text-align: center;">
+							<label class="newton-label" for="searchBy">Search Type &nbsp;</label> 					
+								<div class="dropdown" style="display: inline-block;">
+									<select class="dropdown-select form-control" ng-model="dashboard.selectedSearchBy" ng-options="s.name for s in picklists.searchTypeList" 
+																	ng-change="searchByValueChanged()">
+									</select>
+								</div> 
+							<label style="margin-left: 25px;" class="newton-label" for="searchByName">{{dashboard.selectedSearchBy.name}} &nbsp;</label>
+							<div id="selectedSearchByName" ng-switch on="dashboard.selectedSearchBy.name" style="margin-right: 15px; display: inline-block;">
+								<div ng-switch-when="Customer">
+									<input type="text" ng-model="dashboard.customerName" class="form-control" style="display: inline-block;">
+								</div>
+								<div ng-switch-when="Agent">
+									<div class="dropdown">
+										<select class="dropdown-select form-control" ng-model="dashboard.selectedAgent" ng-options="a.name for a in picklists.agentList"></select>
+									</div>
+								</div>
+								<div ng-switch-when="Workgroup">
+									<div class="dropdown">
+										<select class="dropdown-select form-control" ng-model="dashboard.selectedWorkgroup" ng-options="w.name for w in picklists.workgroupList"></select>
+									</div>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-sm btn-primary"
+								ng-disabled="picklistError"
+							 	ng-click="refreshCharts()">Submit</button>
+						</div>								
+					</div>
+				</div>
+		</div>
+								
+		<div id="dashboard-charts" class="row" style="margin-left: 0px; margin-right: 0px;">
+				<div class="row"  style="margin-bottom: -20px; margin-right: -15px; margin-left: -15px;">
+					<div id="dashboard-customerRequest-chart" class="col-md-6">
+						<div class="roundbox-outer gray-border ">
+							<div class="roundbox-title">
+								<div style="text-align:center;"><label style="font-weight: bold; margin-top: 7px; color: rgb(85, 85, 85);">NextGen Customer Requests by Status and Region</label>
+									<div class="buttons">
+										<a href="" class="btn" data-toggle="modal" data-target="#customerRequestsLegendModal"> 
+											<i class="fa fa-question"></i>
+										</a>
+									</div>
+								</div>			  
+							</div>
+							<div class="roundbox-content">
+								<div style="margin-top: 2px;">
+		 								<div class="center" dashboard-max-value="maxDashboardValue" dashboard-chart-view-flot charttype="barchart" chartlegend="customerRequests" chartdata="crStateSummaryList"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				    
+					<div id="dashboard-serviceRequest-chart" class="col-md-6"> 
+						<div class="roundbox-outer gray-border">
+							<div class="roundbox-title">
+								<div style="text-align:center;"><label style="font-weight: bold; margin-top: 7px; color: rgb(85, 85, 85);">NextGen Service Requests by Status and Region</label>
+									<div class="buttons">
+										<a href="" class="btn" data-toggle="modal" data-target="#serviceRequestsLegendModal"> 
+											<i class="fa fa-question"></i>
+										</a>
+									</div>
+								</div>			  
+							</div>						
+							<div class="roundbox-content">
+								<div style="margin-top: 2px;">
+									<div class="center" dashboard-max-value="maxDashboardValue" dashboard-chart-view-flot charttype="barchartwithJ" chartlegend="serviceRequests" chartdata="srStateSummaryList"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div us-spinner="{radius:9, width:5, length: 12, corners: 1, top: '0px', left: 'auto', className: 'spinner'}"></div>
+						
+				<div class="row"  style="margin-bottom: -20px; margin-right: -15px; margin-left: -15px;">
+					<div id="dashboard-emfscustomerRequest-chart" class="col-md-6">
+						<div class="roundbox-outer gray-border ">
+							<div class="roundbox-title">
+								<div style="text-align:center;"><label style="font-weight: bold; margin-top: 7px; color: rgb(85, 85, 85);">EFMS Customer Requests by Status and Region</label>
+									<div class="buttons">
+										<a href="" class="btn" data-toggle="modal" data-target="#efmsCustomerRequestsLegendModal"> 
+											<i class="fa fa-question"></i>
+										</a>
+									</div>
+								</div>			  
+							</div>
+							<div class="roundbox-content">
+								<div style="margin-top: 2px;">
+		 								<div class="center" dashboard-max-value="maxDashboardValue" dashboard-chart-view-flot charttype="barchart" chartlegend="efmsCustomerRequests" chartdata="efmsCrStateSummaryList"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				    
+					<div id="dashboard-serviceRequest-chart" class="col-md-6"> 
+						<div class="roundbox-outer gray-border">
+							<div class="roundbox-title">
+								<div style="text-align:center;"><label style="font-weight: bold; margin-top: 7px; color: rgb(85, 85, 85);">EFMS Service Requests by Status and Region</label>
+									<div class="buttons">
+										<a href="" class="btn" data-toggle="modal" data-target="#efmsServiceRequestsLegendModal"> 
+											<i class="fa fa-question"></i>
+										</a>
+									</div>
+								</div>			  
+							</div>						
+							<div class="roundbox-content">
+								<div style="margin-top: 2px;">
+									<div class="center" dashboard-max-value="maxDashboardValue" dashboard-chart-view-flot charttype="barchartwithJ" chartlegend="efmsServiceRequests" chartdata="efmsSrStateSummaryList"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+						
+						
+						
+				<div class="row" style="margin-right: -15px; margin-left: -15px;">
+					<div id="dashboard-ordersByStatus-chart" class="col-md-6">
+						<div class="roundbox-outer gray-border">	           
+							<div class="roundbox-title">
+								<div style="text-align:center;"><label style="font-weight: bold; margin-top: 7px; color: rgb(85, 85, 85);">Service Orders by Status and Region</label>
+									<div class="buttons">
+										<a href="" class="btn" data-toggle="modal" data-target="#ordersByStatusLegendModal"> 
+											<i class="fa fa-question"></i>
+										</a>
+									</div>
+								</div>			  
+							</div>
+							<div class="roundbox-content">
+								<div style="margin-top: 2px;">
+									<div class="center" dashboard-max-value="maxDashboardValue" dashboard-chart-view-flot charttype="orderbarchart" chartlegend="ordersByStatus" chartdata="ordersStateSummaryList"></div>						 
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div id="dashboard-ordersByActiviy-chart" class="col-md-6">
+						<div class="roundbox-outer gray-border">
+							<div class="roundbox-title">
+								<div style="text-align:center;"><label style="font-weight: bold; margin-top: 7px; color: rgb(85, 85, 85);">Orders by Activity</label>
+									<div class="buttons">
+										<a href="" class="btn" data-toggle="modal" data-target="#ordersByActivityLegendModal"> 
+											<i class="fa fa-question"></i>
+										</a>
+									</div>
+								</div>			  
+							</div>						
+							<div class="roundbox-content">
+								<div style="margin-top: 2px;">
+	 								<div class="center" dashboard-chart-view-flot charttype="piechart" chartlegend="ordersByActivity" chartdata="ordersActivitySummaryList"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+		
+		<!-- Alert shows when a retrieval error ocurrs trying to get the picklist values-->
+		<!-- Need to make this a div instead of <alert-with-html/> since we have to include a style that adds margins -->
+		<div alert-with-html style="margin-left: 28px; margin-right: 28px;" data-error-prefix="<strong>Data retreival error</strong> (refresh page to retry): "
+		 	data-error-msg="picklistError" data-error-msg-html="picklistErrorHtml"></div>
+
+		<!-- Alert shows when a chart data retrieval error ocurrs -->
+		<div alert-with-html style="margin-left: 20px; margin-right: 28px;" data-error-prefix="<strong>Chart data retreival error: </strong>"
+			data-error-msg="chartDataError" data-error-msg-html="chartDataErrorHtml"></div>
+		 
+	</div>
+	
+	<!-- Modal - NextGen Customer Requests -->
+	<div class="modal fade" id="customerRequestsLegendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Chart Information</h4>
+	      </div>
+	      <div id="customerRequestsLegendContainer" class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<!-- Modal - Nextgen Service Requests -->
+	<div class="modal fade" id="serviceRequestsLegendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Chart Information</h4>
+	      </div>
+	      <div id="serviceRequestsLegendContainer" class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	
+	<!-- Modal - EFMS Customer Requests -->
+	<div class="modal fade" id="efmsCustomerRequestsLegendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Chart Information</h4>
+	      </div>
+	      <div id="efmsCustomerRequestsLegendContainer" class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<!-- Modal - EFMS Service Requests -->
+	<div class="modal fade" id="efmsServiceRequestsLegendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Chart Information</h4>
+	      </div>
+	      <div id="efmsserviceRequestsLegendContainer" class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	
+	
+	<!-- Modal - Order by Status -->
+	<div class="modal fade" id="ordersByStatusLegendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Chart Information</h4>
+	      </div>
+	      <div id="ordersByStatusLegendContainer" class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<!-- Modal -->
+	<div class="modal fade" id="ordersByActivityLegendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Chart Information</h4>
+	      </div>
+	      <div id="ordersByActivityLegendContainer" class="modal-body"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+</div>

@@ -1,0 +1,1 @@
+This is a package for angular js common components
